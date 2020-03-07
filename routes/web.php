@@ -17,4 +17,13 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function() {
+	Route::resource('establecimientos', 'EstablishmentController');
+
+	// Marcas
+	Route::get('/marcas/get-list', 'BrandController@getList')->name('marcas-get-list');
+	Route::resource('marcas', 'BrandController');
+});
+
+Route::get('/admin', 'HomeController@index')->name('home');
+
