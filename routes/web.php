@@ -17,7 +17,6 @@ Auth::routes();
 
 Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function() {
 	Route::resource('establecimientos', 'EstablishmentController');
-
 	// Marcas
 	Route::get('/marcas/get-list', 'BrandController@getList')->name('marcas-get-list');
 	Route::resource('marcas', 'BrandController');
