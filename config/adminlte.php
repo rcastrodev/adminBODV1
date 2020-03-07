@@ -374,5 +374,17 @@ return [
                 ],
             ],
         ],
+        [
+            'name' => 'admin css',
+            'active' => true,
+            'files' => [
+                [
+                    'type' => 'css',
+                    'asset' => true,
+                    'location' => '/css/admin.css',
+                ],
+            ],
+        ],
     ],
 ];
+
