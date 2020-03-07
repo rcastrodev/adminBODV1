@@ -194,7 +194,7 @@ return [
         [
             'text' => 'Marcas',
             'url'  => '/admin/marcas',
-            'icon' => 'fab fa-product-hunt',
+            'icon' => 'far fa-copyright',
         ],
         [
             'text' => 'Establecimientos',

@@ -21,7 +21,7 @@
 		@include('partials.messages.errors')
 		@include('partials.messages.success')
 		<div class="row">
-			<div class="col-sm-12 col-md-6" data-select2-id="29">
+			<div class="col-sm-12 col-md-6">
 				<div class="form-group">
 					<label for="name">Nombre</label>
 					<input type="text" class="form-control" id="name" name="name" value="{{ old('name') }}">

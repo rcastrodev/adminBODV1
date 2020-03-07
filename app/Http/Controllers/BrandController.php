@@ -61,8 +61,9 @@ class BrandController extends Controller
         }
 
         Brands::create($args);
+        $ultimoRegistro = Brands::all()->last();
 
-        return back()
+        return redirect('/admin/marcas/'.$ultimoRegistro->id.'/edit')
                 ->with('mensaje', $this->messages['create'])
                 ->withInput($request->all());
     }
@@ -75,7 +76,8 @@ class BrandController extends Controller
      */
     public function show($id)
     {
-        //
+        $brand = Brands::findorfail($id);
+        return view('admin.brands.show', compact('brand'));
     }
 
     /**
@@ -156,7 +158,7 @@ class BrandController extends Controller
         return datatables()->eloquent(Brands::query())
                 ->addColumn('accion', 'admin.brands.columnButtonAction')
                 ->editColumn('name', function(Brands $brand) {
-                    return '<a href="#">'. $brand->name . '</a>';
+                    return '<a href="/admin/marcas/'. $brand->id.'">'. $brand->name . '</a>';
                 })
                 ->rawColumns(['name' => 'name', 'accion' => 'accion'])
                 ->toJson();
