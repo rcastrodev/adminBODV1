@@ -15,24 +15,24 @@ class CreateEstablishmentsTable extends Migration
     {
         Schema::create('establishments', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('user_id', 20);
+            $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')
                                         ->onDelete('set null')
                                         ->onUpdate('cascade');
-            $table->unsignedBigInteger('brands_id', 20);
+            $table->unsignedBigInteger('brands_id');
             $table->foreign('brands_id')->references('id')->on('brands')
                                         ->onDelete('set null')
                                         ->onUpdate('cascade');
             $table->integer('status', 20)->unsigned(); 
-            $table->unsignedBigInteger('gastronomy_id', 20);
+            $table->unsignedBigInteger('gastronomy_id');
             $table->foreign('gastronomy_id')->references('id')->on('gastronomies')
                                         ->onDelete('set null')
                                         ->onUpdate('cascade');
-            $table->unsignedBigInteger('country_id', 20);                            
+            $table->unsignedBigInteger('country_id');                            
             $table->foreign('country_id')->references('id')->on('countries')
                                         ->onDelete('set null')
                                         ->onUpdate('cascade');
-            $table->unsignedBigInteger('region_id', 20);  
+            $table->unsignedBigInteger('region_id');  
             $table->foreign('region_id')->references('id')->on('regions')
                                         ->onDelete('set null')
                                         ->onUpdate('cascade');
@@ -40,7 +40,7 @@ class CreateEstablishmentsTable extends Migration
             $table->foreign('city_id')->references('id')->on('cities')
                                         ->onDelete('set null')
                                         ->onUpdate('cascade');
-            $table->unsignedBigInteger('zone_id', 20);                              
+            $table->unsignedBigInteger('zone_id');                              
             $table->foreign('zone_id')->references('id')->on('zones')
                                         ->onDelete('set null')
                                         ->onUpdate('cascade');
