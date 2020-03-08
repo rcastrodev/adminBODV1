@@ -13,13 +13,13 @@
 	@section('content')
 	<div class="pb-5">
 	@include('admin.establishments.form.create.establishment-of-basic-data')
-	{{-- 
+
 	@include('admin.establishments.form.create.image-gallery')
 	@include('admin.establishments.form.create.seasonal-discount')
 	@include('admin.establishments.form.create.maximum-number-of-forks')
 	@include('admin.establishments.form.create.opening-hours')
 	@include('admin.establishments.form.create.discounts-for-number-of-people')
-	 --}}
+
 	</div>
 
 @stop
