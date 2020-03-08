@@ -3,6 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Brands;
+use App\Country;
+use App\Region;
+use App\City;
+use App\Zone;
+use App\Type;
 
 class EstablishmentController extends Controller
 {
@@ -23,7 +29,15 @@ class EstablishmentController extends Controller
      */
     public function create()
     {
-        return view('admin.establishments.create');
+        $countries = Country::all();
+        $regions = Region::all();
+        $cities = City::all();
+        $zones = Zone::all();
+        $brands = Brands::all();
+        $types = Type::all();
+        return view('admin.establishments.create', compact('countries', 'regions', 'cities',
+            'zones', 'brands', 'types'
+        ));
     }
 
     /**

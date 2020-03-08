@@ -15,11 +15,11 @@ class CreateGalleryEstablishmentsTable extends Migration
     {
         Schema::create('gallery_establishments', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('establishment_id', 20);
+            $table->unsignedBigInteger('establishment_id');
             $table->foreign('establishment_id')->references('id')->on('establishments')
-                                        ->onDelete('set null')
+                                        ->onDelete('cascade')
                                         ->onUpdate('cascade');
-            $table->integer('order', 20);
+            $table->integer('order');
             $table->string('name');
             $table->string('ruta');                    
             $table->timestamps();

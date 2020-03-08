@@ -15,11 +15,11 @@ class CreateEstablishmentOpeningHoursTable extends Migration
     {
         Schema::create('establishment_opening_hours', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('establishment_id', 20);
+            $table->unsignedBigInteger('establishment_id');
             $table->foreign('establishment_id')->references('id')->on('establishments')
-                                        ->onDelete('set null')
+                                        ->onDelete('cascade')
                                         ->onUpdate('cascade');
-            $table->string('day', 20);
+            $table->string('day');
             $table->time('time_since');
             $table->time('time_until');                    
             $table->timestamps();

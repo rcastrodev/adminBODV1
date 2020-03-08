@@ -15,17 +15,17 @@ class CreateEstablishmentForksTable extends Migration
     {
         Schema::create('establishment_forks', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('establishment_id', 20);
+            $table->unsignedBigInteger('establishment_id');
             $table->foreign('establishment_id')->references('id')->on('establishments')
-                                        ->onDelete('set null')
+                                        ->onDelete('cascade')
                                         ->onUpdate('cascade');
-            $table->integer('monday', 20)->nullable();
-            $table->integer('tuesday', 20)->nullable();
-            $table->integer('wednesday', 20)->nullable();
-            $table->integer('thursday', 20)->nullable();
-            $table->integer('friday', 20)->nullable();
-            $table->integer('saturday', 20)->nullable();
-            $table->integer('sunday', 20)->nullable();                     
+            $table->integer('monday')->nullable();
+            $table->integer('tuesday')->nullable();
+            $table->integer('wednesday')->nullable();
+            $table->integer('thursday')->nullable();
+            $table->integer('friday')->nullable();
+            $table->integer('saturday')->nullable();
+            $table->integer('sunday')->nullable();                     
             $table->timestamps();
         });
     }

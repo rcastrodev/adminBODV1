@@ -173,6 +173,7 @@ return [
     */
 
     'menu' => [
+        /*
         [
             'text' => 'search',
             'search' => true,
@@ -183,6 +184,7 @@ return [
             'url'  => 'admin/blog',
             'can'  => 'manage-blog',
         ],
+        /*
         [
             'text'        => 'pages',
             'url'         => 'admin/pages',
@@ -190,7 +192,8 @@ return [
             'label'       => 4,
             'label_color' => 'success',
         ],
-        ['header' => 'account_settings'],
+        */
+        ['header' => ''],
         [
             'text' => 'Marcas',
             'url'  => '/admin/marcas',
