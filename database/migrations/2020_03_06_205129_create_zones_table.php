@@ -15,19 +15,22 @@ class CreateZonesTable extends Migration
     {
         Schema::create('zones', function (Blueprint $table) {
             $table->bigIncrements('id');
+            
             $table->unsignedBigInteger('country_id');
             $table->foreign('country_id')->references('id')->on('countries')
                                         ->onDelete('cascade')
                                         ->onUpdate('cascade');
+
             $table->unsignedBigInteger('region_id');
             $table->foreign('region_id')->references('id')->on('regions')
                                         ->onDelete('cascade')
                                         ->onUpdate('cascade');
+
             $table->unsignedBigInteger('city_id');
             $table->foreign('city_id')->references('id')->on('cities')
                                         ->onDelete('cascade')
                                         ->onUpdate('cascade');
-            $table->text('zone');
+            $table->string('zone');
             $table->timestamps();
         });
     }

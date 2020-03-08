@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateGastronomiesTable extends Migration
+class CreateTypesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,11 @@ class CreateGastronomiesTable extends Migration
      */
     public function up()
     {
-        Schema::create('gastronomies', function (Blueprint $table) {
+        Schema::create('types', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('gastranomy')->unique();
+            $table->string('name', 50)->unique()->nullable();
+            $table->string('value', 100)->nullable();
+            $table->string('category', 50)->nullable();
             $table->timestamps();
         });
     }
@@ -27,6 +29,6 @@ class CreateGastronomiesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('gastronomies');
+        Schema::dropIfExists('types');
     }
 }

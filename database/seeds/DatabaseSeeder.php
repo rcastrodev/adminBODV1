@@ -8,6 +8,7 @@ use App\City;
 use App\Region;
 use App\Zone;
 use App\Gastronomy;
+use App\Type;
 
 class DatabaseSeeder extends Seeder
 {
@@ -119,20 +120,28 @@ class DatabaseSeeder extends Seeder
 
         // Crear Gastronomia
 
-        $gastronomy             = new Gastronomy();
-        $gastronomy->gastranomy = 'Italiana';
-        $city->save();
+        $type           = new Type();
+        $type->name     =  'Se prendio la rumba';
+        $type->value    = 'lo que nos pueda colaborar';
+        $type->category = 'Evento';
+        $type->save();
 
-        $gastronomy             = new Gastronomy();
-        $gastronomy->gastranomy = 'mexicana';
-        $city->save();
+        $type             = new Type();
+        $type->name       = 'Pasa un dia diferente';
+        $type->value        = 'lo que nos pueda colaborar';
+        $type->category   = 'Evento';
+        $type->save();
 
-        $gastronomy             = new Gastronomy();
-        $gastronomy->gastranomy = 'peruana';
-        $city->save();
+        $type           = new Type();
+        $type->name     = 'Ron';
+        $type->value    = 'lo que nos pueda colaborar';
+        $type->category = 'Evento';
+        $type->save();
 
-        $gastronomy              = new Gastronomy();
-        $gastronomy->gastranomy  = 'china';
-        $city->save();
+        $type           = new Type();
+        $type->name     = 'Cerveza';
+        $type->value    = 'lo que nos pueda colaborar';
+        $type->category = 'Producto';
+        $type->save();
     }
 }

@@ -15,37 +15,44 @@ class CreateEstablishmentsTable extends Migration
     {
         Schema::create('establishments', function (Blueprint $table) {
             $table->bigIncrements('id');
+
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')
-                                        ->onDelete('set null')
+                                        ->onDelete('cascade')
                                         ->onUpdate('cascade');
-            $table->unsignedBigInteger('brands_id');
-            $table->foreign('brands_id')->references('id')->on('brands')
-                                        ->onDelete('set null')
+
+            $table->unsignedBigInteger('brand_id');
+            $table->foreign('brand_id')->references('id')->on('brands')
+                                        ->onDelete('cascade')
                                         ->onUpdate('cascade');
-            $table->integer('status', 20)->unsigned(); 
-            $table->unsignedBigInteger('gastronomy_id');
-            $table->foreign('gastronomy_id')->references('id')->on('gastronomies')
-                                        ->onDelete('set null')
+
+            $table->unsignedBigInteger('status'); 
+
+            $table->unsignedBigInteger('type_id');
+            $table->foreign('type_id')->references('id')->on('types')
+                                        ->onDelete('cascade')
                                         ->onUpdate('cascade');
-            $table->unsignedBigInteger('country_id');                            
+            
+            $table->unsignedBigInteger('country_id');     
             $table->foreign('country_id')->references('id')->on('countries')
-                                        ->onDelete('set null')
+                                        ->onDelete('cascade')
                                         ->onUpdate('cascade');
+            
             $table->unsignedBigInteger('region_id');  
             $table->foreign('region_id')->references('id')->on('regions')
-                                        ->onDelete('set null')
+                                        ->onDelete('cascade')
                                         ->onUpdate('cascade');
-            $table->unsignedBigInteger('city_id', 20);  
+
+            $table->unsignedBigInteger('city_id'); 
             $table->foreign('city_id')->references('id')->on('cities')
-                                        ->onDelete('set null')
+                                        ->onDelete('cascade')
                                         ->onUpdate('cascade');
+
             $table->unsignedBigInteger('zone_id');                              
             $table->foreign('zone_id')->references('id')->on('zones')
-                                        ->onDelete('set null')
-                                        ->onUpdate('cascade');
+                                        ->onDelete('cascade')
+                                        ->onUpdate('cascade');                                     
             $table->string('name', 100);
-            $table->text('address')->nullable();
             $table->string('latitude')->nullable();
             $table->string('length')->nullable();
             $table->string('phone', 50)->nullable();
@@ -54,9 +61,10 @@ class CreateEstablishmentsTable extends Migration
             $table->string('main_image')->nullable();
             $table->boolean('publish_on_the_web')->default(false);
             $table->boolean('admit_reservation')->default(false);
-            $table->integer('linear_discount', 20)->unsigned();;
-            $table->text('description')->nullable();
+            $table->integer('linear_discount')->unsigned();
             $table->text('menu')->nullable();   
+            $table->text('description')->nullable();
+            $table->text('address')->nullable();
             $table->timestamps();
         });
     }
