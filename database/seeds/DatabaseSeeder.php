@@ -77,19 +77,16 @@ class DatabaseSeeder extends Seeder
         // Crear Ciudades
 
         $city = new City();
-        $city->country_id 	= 2;
         $city->region_id    = 1;
         $city->city 		= 'Caracas';
         $city->save();
 
         $city = new City();
-        $city->country_id 	= 2;
         $city->region_id    = 3;
         $city->city 		= 'Valencia';
         $city->save();
 
         $city = new City();
-        $city->country_id 	= 2;
         $city->region_id    = 2;
         $city->city 		= 'Maracaibo';
         $city->save();
@@ -97,22 +94,16 @@ class DatabaseSeeder extends Seeder
         // Crear Zonas
 
         $zone = new Zone();
-        $zone->country_id   = 2;
-        $zone->region_id    = 1;
         $zone->city_id      = 1;
         $zone->zone         = 'Artigas';
         $zone->save();
 
         $zone = new Zone();
-        $zone->country_id   = 2;
-        $zone->region_id    = 1;
         $zone->city_id      = 1;
         $zone->zone         = 'Los Palos Grandes';
         $zone->save();
 
         $zone = new Zone();
-        $zone->country_id   = 2;
-        $zone->region_id    = 1;
         $zone->city_id      = 1;
         $zone->zone         = 'Plaza Vzla';
         $zone->save();
