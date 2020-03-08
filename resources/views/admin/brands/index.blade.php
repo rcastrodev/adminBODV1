@@ -60,7 +60,10 @@
 					{data: 'tel' },
 					{data: 'email'},
 					{ data: 'accion', name: 'accion', orderable: false, searchable: false }
-				] 
+				],
+				language: {
+            			url: "//cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json",
+        			}, 
 			})
 		})
 	</script>
