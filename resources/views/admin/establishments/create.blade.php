@@ -8,7 +8,7 @@
 @section('content')
 <div class="card card-default">
 	<div class="card-header">
-		<h3 class="card-title">Crear establecimientos <a href="/admin/establecimientos/" class="ml-3 btn btn-sm btn-primary">Ver establecimiento</a></h3>
+		<h3 class="card-title">Crear establecimientos <a href="/admin/establecimientos/" class="ml-3 btn btn-sm btn-primary">Ver establecimientos</a></h3>
 
 		<div class="card-tools">
 			<button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>

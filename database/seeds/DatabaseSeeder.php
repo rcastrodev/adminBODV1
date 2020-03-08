@@ -7,6 +7,7 @@ use App\Country;
 use App\City;
 use App\Region;
 use App\Zone;
+use App\Gastronomy;
 
 class DatabaseSeeder extends Seeder
 {
@@ -56,20 +57,20 @@ class DatabaseSeeder extends Seeder
 
         // Crear Regiones
 
-        $country = new Region();
-        $country->country_id    = 2;
-        $country->region        = 'Distrito Capital';
-        $country->save();
+        $region = new Region();
+        $region->country_id    = 2;
+        $region->region        = 'Distrito Capital';
+        $region->save();
 
-        $country = new Region();
-        $country->country_id    = 2;
-        $country->region        = 'Zulia';
-        $country->save();
+        $region = new Region();
+        $region->country_id    = 2;
+        $region->region        = 'Zulia';
+        $region->save();
 
-        $country = new Region();
-        $country->country_id    = 2;
-        $country->region        = 'Carabobo';
-        $country->save();
+        $region = new Region();
+        $region->country_id    = 2;
+        $region->region        = 'Carabobo';
+        $region->save();
 
 
         // Crear Ciudades
@@ -94,25 +95,44 @@ class DatabaseSeeder extends Seeder
 
         // Crear Zonas
 
-        $city = new Zone();
-        $city->country_id   = 2;
-        $city->region_id    = 1;
-        $city->city_id      = 1;
-        $city->zone         = 'Artigas';
+        $zone = new Zone();
+        $zone->country_id   = 2;
+        $zone->region_id    = 1;
+        $zone->city_id      = 1;
+        $zone->zone         = 'Artigas';
+        $zone->save();
+
+        $zone = new Zone();
+        $zone->country_id   = 2;
+        $zone->region_id    = 1;
+        $zone->city_id      = 1;
+        $zone->zone         = 'Los Palos Grandes';
+        $zone->save();
+
+        $zone = new Zone();
+        $zone->country_id   = 2;
+        $zone->region_id    = 1;
+        $zone->city_id      = 1;
+        $zone->zone         = 'Plaza Vzla';
+        $zone->save();
+
+
+        // Crear Gastronomia
+
+        $gastronomy             = new Gastronomy();
+        $gastronomy->gastranomy = 'Italiana';
         $city->save();
 
-        $city = new Zone();
-        $city->country_id   = 2;
-        $city->region_id    = 1;
-        $city->city_id      = 1;
-        $city->zone         = 'Los Palos Grandes';
+        $gastronomy             = new Gastronomy();
+        $gastronomy->gastranomy = 'mexicana';
         $city->save();
 
-        $city = new Zone();
-        $city->country_id   = 2;
-        $city->region_id    = 1;
-        $city->city_id      = 1;
-        $city->zone         = 'Plaza Vzla';
+        $gastronomy             = new Gastronomy();
+        $gastronomy->gastranomy = 'peruana';
+        $city->save();
+
+        $gastronomy              = new Gastronomy();
+        $gastronomy->gastranomy  = 'china';
         $city->save();
     }
 }

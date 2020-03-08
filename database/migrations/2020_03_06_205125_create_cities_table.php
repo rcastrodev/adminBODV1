@@ -23,7 +23,7 @@ class CreateCitiesTable extends Migration
             $table->foreign('region_id')->references('id')->on('regions')
                                         ->onDelete('cascade')
                                         ->onUpdate('cascade');
-            $table->string('city');
+            $table->string('city')->unique();
             $table->timestamps();
         });
     }

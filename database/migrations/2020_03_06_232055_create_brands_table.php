@@ -15,11 +15,11 @@ class CreateBrandsTable extends Migration
     {
         Schema::create('brands', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name')->nullable();
-            $table->string('rif')->nullable();
-            $table->string('tel')->nullable();
+            $table->string('name');
+            $table->string('rif')->unique();
+            $table->string('tel');
             $table->string('contact_person')->nullable();
-            $table->string('email')->nullable();
+            $table->string('email')->unique();
             $table->text('address')->nullable();
             $table->string('logo')->nullable();
             $table->string('status')->nullable();

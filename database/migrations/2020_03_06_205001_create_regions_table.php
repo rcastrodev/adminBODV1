@@ -19,7 +19,7 @@ class CreateRegionsTable extends Migration
             $table->foreign('country_id')->references('id')->on('countries')
                                         ->onDelete('cascade')
                                         ->onUpdate('cascade');
-            $table->string('region');
+            $table->string('region')->unique();
             $table->timestamps();
         });
     }
