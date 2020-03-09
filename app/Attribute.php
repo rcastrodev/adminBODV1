@@ -4,11 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Zone extends Model
+class Attribute extends Model
 {
     protected $fillable = [
-    	'name',
-    	'code',
-    	'city_id'
+    	'key',
+    	'value',
+    	'use'
     ];
 }

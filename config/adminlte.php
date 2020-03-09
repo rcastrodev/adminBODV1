@@ -234,23 +234,27 @@ return [
             'submenu' => [
                 [
                     'text' => 'Atributos',
-                    'url'  => '#',
+                    'url'  => '/admin/atributos',
                 ],
                 [
                     'text' => 'País',
-                    'url'  => '#',
+                    'url'  => '/admin/paises',
+                ],
+                [
+                    'text' => 'Estado',
+                    'url'  => '/admin/estados',
                 ],
                 [
                     'text' => 'Ciudad',
-                    'url'  => '#',
+                    'url'  => '/admin/ciudades',
                 ],
                 [
                     'text' => 'Zona',
-                    'url'  => '#',
+                    'url'  => '/admin/zonas',
                 ],
                 [
                     'text' => 'Monedas',
-                    'url'  => '#',
+                    'url'  => '/admin/monedas',
                 ],
             ],
         ],

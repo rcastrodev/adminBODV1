@@ -9,6 +9,7 @@ use App\Region;
 use App\Zone;
 use App\Gastronomy;
 use App\Type;
+use App\Coin;
 
 class DatabaseSeeder extends Seeder
 {
@@ -61,54 +62,66 @@ class DatabaseSeeder extends Seeder
 
         // Crear Regiones
 
-        $region = new Region();
-        $region->country_id    = 2;
-        $region->region        = 'Distrito Capital';
+        $region             = new Region();
+        $region->country_id = 2;
+        $region->name       = 'Distrito Capital';
+        $region->code       = '01';
         $region->save();
 
-        $region = new Region();
-        $region->country_id    = 2;
-        $region->region        = 'Zulia';
+        $region             = new Region();
+        $region->country_id = 2;
+        $region->name       = 'Zulia';
+        $region->code       = '02';
         $region->save();
 
-        $region = new Region();
-        $region->country_id    = 2;
-        $region->region        = 'Carabobo';
+        $region             = new Region();
+        $region->country_id = 2;
+        $region->name       = 'Carabobo';
+        $region->code       = '03';
         $region->save();
 
 
         // Crear Ciudades
 
         $city = new City();
-        $city->region_id    = 1;
-        $city->city 		= 'Caracas';
+        $city->region_id  = 1;
+        $city->country_id = 2;
+        $city->name       = 'Caracas';
+        $city->code 	  = '0001';
         $city->save();
 
         $city = new City();
-        $city->region_id    = 3;
-        $city->city 		= 'Valencia';
+        $city->region_id  = 3;
+        $city->country_id = 2;
+        $city->name       = 'Valencia';
+        $city->code 	  = '0002';
         $city->save();
 
         $city = new City();
-        $city->region_id    = 2;
-        $city->city 		= 'Maracaibo';
+        $city->region_id  = 2;
+        $city->country_id = 2;
+        $city->name       = 'Maracaibo';
+        $city->code 	  = '0003';
         $city->save();
 
         // Crear Zonas
 
         $zone = new Zone();
         $zone->city_id      = 1;
-        $zone->zone         = 'Artigas';
+        $zone->name         = 'Artigas';
+        $zone->code         = '0001';
         $zone->save();
 
         $zone = new Zone();
         $zone->city_id      = 1;
-        $zone->zone         = 'Los Palos Grandes';
+        $zone->name         = 'Los Palos Grandes';
+        $zone->code         = '0002';
         $zone->save();
 
         $zone = new Zone();
         $zone->city_id      = 1;
-        $zone->zone         = 'Plaza Vzla';
+        $zone->name         = 'Plaza Vzla';
+        $zone->code         = '0003';
         $zone->save();
 
 
@@ -137,5 +150,14 @@ class DatabaseSeeder extends Seeder
         $type->value    = 'lo que nos pueda colaborar';
         $type->category = 'Producto';
         $type->save();
+
+
+        // Crear Moneda
+
+        $coin            = new Coin();
+        $coin->name      = 'Bolivar Soberano';
+        $coin->shortname = 'Bolivares';
+        $coin->symbol  = 'Bs.S';
+        $coin->save();
     }
 }

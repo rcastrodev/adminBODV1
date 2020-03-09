@@ -19,7 +19,8 @@ class CreateZonesTable extends Migration
             $table->foreign('city_id')->references('id')->on('cities')
                                         ->onDelete('cascade')
                                         ->onUpdate('cascade');
-            $table->string('zone');
+            $table->string('name');
+            $table->string('code')->unique();
             $table->timestamps();
         });
     }
