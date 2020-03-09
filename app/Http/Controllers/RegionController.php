@@ -137,4 +137,10 @@ class RegionController extends Controller
                 ->rawColumns(['name' => 'name', 'accion' => 'accion'])
                 ->toJson();
     }
+
+    public function byCountry(Request $request)
+    {
+        $regions = Region::where('country_id', $request['id'])->get();
+        return response()->json($regions);
+    }
 }

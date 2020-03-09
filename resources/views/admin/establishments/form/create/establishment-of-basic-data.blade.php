@@ -23,7 +23,7 @@
 				</div>
 				<div class="form-group">
 					<label for="country_id">Pais</label>
-					<select name="country_id" class="form-control select2" style="width: 100%;">
+					<select name="country_id" class="form-control select2-p" style="width: 100%;">
 						@foreach ($countries as $idCountry => $country)
 						<option value="{{$country->id}}">{{$country->name}}</option>
 						@endforeach
@@ -31,10 +31,8 @@
 				</div>		
 				<div class="form-group">
 					<label for="city_id">Ciudad</label>
-					<select name="city_id" class="form-control select2" style="width: 100%;">
-						@foreach ($cities as $idCity => $city)
-						<option value="{{$city->id}}">{{$city->name}}</option>
-						@endforeach
+					<select name="city_id" class="form-control select2 city" style="width: 100%;">
+						<option value="">Seleccione una ciudad ...</option>
 					</select>
 				</div>
 				<div class="form-group">
@@ -84,18 +82,14 @@
 				</div>
 				<div class="form-group">
 					<label for="region_id">Departamento o Estado</label>
-					<select name="region_id" class="form-control select2" style="width: 100%;">
-						@foreach ($regions as $idRegion => $region)
-						<option value="{{$region->id}}">{{$region->name}}</option>
-						@endforeach
+					<select name="region_id" class="form-control select2 region" style="width: 100%;">
+						<option value="">Seleccione un estado ...</option>
 					</select>
 				</div>
 				<div class="form-group">
 					<label for="zone_id">Zona</label>
-					<select name="zone_id" class="form-control select2" style="width: 100%;">
-						@foreach ($zones as $idZones => $zone)
-						<option value="{{$zone->id}}">{{$zone->name}}</option>
-						@endforeach
+					<select name="zone_id" class="form-control select2 zone" style="width: 100%;">
+						<option value="">Seleccione una zona ...</option>
 					</select>
 				</div>
 				<div class="form-group">

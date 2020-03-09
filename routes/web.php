@@ -30,14 +30,17 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function() {
 
 	// Configuracion / Estados
 	Route::get('/estados/get-list', 'RegionController@getList')->name('estados-get-list');
+	Route::get('/estados/by-country', 'RegionController@byCountry')->name('estados-by-pais');
 	Route::resource('estados', 'RegionController');
 
 	// Configuracion / Ciudades
 	Route::get('/ciudades/get-list', 'CityController@getList')->name('ciudades-get-list');
+	Route::get('/ciudades/by-region', 'CityController@byRegion')->name('ciudades-by-estado');
 	Route::resource('ciudades', 'CityController');
 
 	// Configuracion / Zonas
 	Route::get('/zonas/get-list', 'ZoneController@getList')->name('zonas-get-list');
+	Route::get('/zonas/by-city', 'ZoneController@byCity')->name('zonas-by-ciudad');
 	Route::resource('zonas', 'ZoneController');
 
 	// Configuracion / Monedas

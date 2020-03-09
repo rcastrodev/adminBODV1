@@ -142,4 +142,10 @@ class CityController extends Controller
                 ->rawColumns(['name' => 'name', 'accion' => 'accion'])
                 ->toJson();
     }
+
+    public function byRegion(Request $request)
+    {
+        $cities = City::where('region_id', $request['id'])->get();
+        return response()->json($cities);
+    }
 }

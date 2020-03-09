@@ -137,4 +137,10 @@ class ZoneController extends Controller
                 ->rawColumns(['name' => 'name', 'accion' => 'accion'])
                 ->toJson();
     }
+
+    public function byCity(Request $request)
+    {
+        $zones = Zone::where('city_id', $request['id'])->get();
+        return response()->json($zones);
+    }
 }
