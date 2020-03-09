@@ -25,7 +25,7 @@
 					<label for="country_id">Pais</label>
 					<select name="country_id" class="form-control select2" style="width: 100%;">
 						@foreach ($countries as $idCountry => $country)
-						<option value="{{$idCountry}}">{{$country->country}}</option>
+						<option value="{{$country->id}}">{{$country->name}}</option>
 						@endforeach
 					</select>
 				</div>		
@@ -33,7 +33,7 @@
 					<label for="city_id">Ciudad</label>
 					<select name="city_id" class="form-control select2" style="width: 100%;">
 						@foreach ($cities as $idCity => $city)
-						<option value="{{$idCity}}">{{$city->city}}</option>
+						<option value="{{$city->id}}">{{$city->name}}</option>
 						@endforeach
 					</select>
 				</div>
@@ -86,7 +86,7 @@
 					<label for="region_id">Departamento o Estado</label>
 					<select name="region_id" class="form-control select2" style="width: 100%;">
 						@foreach ($regions as $idRegion => $region)
-						<option value="{{$idRegion}}">{{$region->region}}</option>
+						<option value="{{$region->id}}">{{$region->name}}</option>
 						@endforeach
 					</select>
 				</div>
@@ -94,7 +94,7 @@
 					<label for="zone_id">Zona</label>
 					<select name="zone_id" class="form-control select2" style="width: 100%;">
 						@foreach ($zones as $idZones => $zone)
-						<option value="{{$idZones}}">{{$zone->zone}}</option>
+						<option value="{{$zone->id}}">{{$zone->name}}</option>
 						@endforeach
 					</select>
 				</div>
