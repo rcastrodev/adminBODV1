@@ -11,7 +11,8 @@
 |
 */
 
-Route::get('/public', 'PublicController@index')->name('public');
+Route::get('/', 'PublicController@index')->name('public');
+Route::get('/ofertas-gastronomicas', 'OfertasGastronomicasController@index')->name('ofertas-gastronomicas');
 
 Auth::routes();
 
@@ -22,6 +23,10 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function() {
 
 	// Establecimeintos
 	Route::resource('establecimientos', 'EstablishmentController');
+
+	// Configuracion / Paises
+	Route::get('/paises/get-list', 'CountryController@getList')->name('paises-get-list');
+	Route::resource('paises', 'CountryController');
 });
 
 Route::get('/admin', 'HomeController@index')->name('home');

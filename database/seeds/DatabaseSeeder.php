@@ -48,13 +48,16 @@ class DatabaseSeeder extends Seeder
     	// Crear Paises
 
         $country = new Country();
-        $country->country = 'Colombia';
+        $country->name = 'Colombia';
+        $country->iso = 'COL';
+        $country->utc = 'UTC-5';
         $country->save();
 
         $country = new Country();
-        $country->country   = 'Venezuela';
+        $country->name = 'Venezuela';
+        $country->iso = 'VEN';
+        $country->utc = 'UTC-4';
         $country->save();
-
 
         // Crear Regiones
 
