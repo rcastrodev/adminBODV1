@@ -14,12 +14,12 @@
 Route::get('/', 'PublicController@index')->name('public');
 Route::get('/ofertas-gastronomicas', 'OfertasGastronomicasController@index')->name('ofertas-gastronomicas');
 
-Auth::routes();
+Auth::routes(['register' => false]);
 
 Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function() {
 	// Marcas
 	Route::get('/marcas/get-list', 'BrandController@getList')->name('marcas-get-list');
-	Route::resource('marcas', 'BrandController');
+	Route::resource('marcas', 'BrandController')->except(['destroy']);
 
 	// Establecimeintos
 	Route::resource('establecimientos', 'EstablishmentController');
@@ -50,6 +50,8 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function() {
 	// Configuracion / Atributos
 	Route::get('/atributos/get-list', 'AttributeController@getList')->name('atributos-get-list');
 	Route::resource('atributos', 'AttributeController');
+
+
 });
 
 Route::get('/admin', 'HomeController@index')->name('home');

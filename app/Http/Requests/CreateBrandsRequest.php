@@ -24,14 +24,13 @@ class CreateBrandsRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required',
-            'rif' => 'required',
-            'tel' => 'required',
-            'contact_person' => 'required',
-            'email' => 'required',
+            'name' => 'required|max:255',
+            'rif' => 'required|unique:brands|max:255',
+            'tel' => 'required|max:50',
+            'contact_person' => 'required|max:255',
+            'email' => 'required|max:100|unique:brands',
             'address' => 'required',
-            'logo' => 'required',
-            'status' => 'required',
+            'logo' => 'required|mimes:jpeg,png,jpg|dimensions:min_width=1080,min_height=1080'
         ];
     }
 
@@ -39,13 +38,20 @@ class CreateBrandsRequest extends FormRequest
     {
         return [
             'name.required' => 'Nombre requerido',
-            'rif.required' => 'Rif requerido',
-            'tel.required' => 'Teléfono requerido',
+            'name.max'      => 'Nombre no puede tener mas de 255 caracteres',
+            'rif.required'  => 'Rif requerido',
+            'rif.unique'    => 'El número de rif ya esta registrado',
+            'rif.max'       => 'El número de rif no puede pasar los 50 caracteres',
+            'tel.required'  => 'Teléfono requerido',
+            'tel.max'       => 'Teléfono requerido',
             'contact_person.required' => 'Persona de contanto requerido',
-            'email.required' => 'Email requerido',
+            'contact_person.max'    => 'El campo persona no puede tener mas de 255 caracteres',
+            'email.required'        => 'Email requerido',
+            'email.unique'        => 'Email ya esta registrado',
             'address.required' => 'Dirección requerida',
             'logo.required' => 'Logo requerido',
-            'status.required' => 'Estatus requerido',
+            'logo.mimes' => 'Solo se pueden subir imágenes con formato jpg, png, jpeg',
+            'logo.dimensions' => 'La imágen de ser mayor ha 1080x1080',
         ];
     }
 }

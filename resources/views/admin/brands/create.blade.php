@@ -34,10 +34,13 @@
 					<label for="email">Email</label>
 					<input type="text" class="form-control" id="email" name="email"  value="{{ old('email') }}">
 				</div>
+
 				<div class="form-group">
-					<label for="status">Estatus</label>
-					<input type="text" class="form-control" id="status" name="status"  value="{{ old('status') }}">
-				</div>
+					<div class="custom-control custom-switch">
+						<input type="checkbox" class="custom-control-input" name="status" value="true" id="status">
+						<label class="custom-control-label" for="status">Estatus</label>
+					</div>
+                </div>
 			</div>
 			<!-- /.col -->
 			<div class="col-sm-12 col-md-6">
@@ -62,11 +65,7 @@
 			<div class="col-sm-12">
 				<label for="address">Dirección</label>
 				<textarea cols='80' id='address' name='address' rows='10' placeholder="Ingresar la dirección">
-					@if (old('address'))
-						{{ old('address') }}
-					@else
-						Ingrese la dirección
-					@endif
+					{{ old('address') }}
 				</textarea>
 			</div>
 			<div class="col-sm-12 mt-4">

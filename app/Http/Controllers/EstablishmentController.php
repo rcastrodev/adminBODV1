@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Brands;
+use App\Brand;
 use App\Country;
 use App\Region;
 use App\City;
@@ -33,8 +33,8 @@ class EstablishmentController extends Controller
         $regions = Region::all();
         $cities = City::all();
         $zones = Zone::all();
-        $brands = Brands::all();
-        $types = Type::all();
+        $brands = Brand::all();
+        $types = Type::where('category', 'Gastronomia')->get();
         return view('admin.establishments.create', compact('countries', 'regions', 'cities',
             'zones', 'brands', 'types'
         ));

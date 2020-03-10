@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\CreateBrandsRequest;
+use App\Http\Requests\UpdateBrandRequest;
+use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\Storage;
-use App\Brands; 
+use App\Brand; 
 
 class BrandController extends Controller
 {
@@ -44,6 +46,8 @@ class BrandController extends Controller
      */
     public function store(CreateBrandsRequest $request)
     {
+        $file = $request->file('logo');
+
         $args = [
             'name'      => $request->input('name'),
             'rif'       => $request->input('rif'),
@@ -51,17 +55,12 @@ class BrandController extends Controller
             'contact_person' => $request->input('contact_person'),
             'email'     => $request->input('email'),
             'address'   => $request->input('address'),
-            'status'    => $request->input('status'),
+            'logo'      => $file->store('brands', 'public'),
+            'status'    => Brand::setStatusAttribute($request->status),
         ];
 
-        if ($request->hasFile('logo')) {
-            $file = $request->file('logo');
-            //guarda la imagen en el storage y guarda la ruta para almacenarla en la base de datos
-            $args['logo'] = $request->file('logo')->store('brands', 'public');
-        }
-
-        Brands::create($args);
-        $ultimoRegistro = Brands::all()->last();
+        Brand::create($args);
+        $ultimoRegistro = Brand::all()->last();
 
         return redirect('/admin/marcas/'.$ultimoRegistro->id.'/edit')
                 ->with('mensaje', $this->messages['create'])
@@ -76,7 +75,7 @@ class BrandController extends Controller
      */
     public function show($id)
     {
-        $brand = Brands::findorfail($id);
+        $brand = Brand::findorfail($id);
         return view('admin.brands.show', compact('brand'));
     }
 
@@ -88,7 +87,7 @@ class BrandController extends Controller
      */
     public function edit($id)
     {
-        $brand = Brands::findorfail($id);
+        $brand = Brand::findorfail($id);
         return view('admin.brands.edit', compact('brand'));
     }
 
@@ -101,28 +100,28 @@ class BrandController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $validator = Validator::make($request->all(), [
+            'name'  => 'required',
+            'rif'   => 'required|unique:brands',
+            'tel'   => 'required',
+            'contact_person' => 'required',
+            'email'     => 'required',
+            'address'   => 'required',
+        ]);
+
         $args = [
-            'name' => $request->input('name'),
-            'rif' => $request->input('rif'),
-            'tel' => $request->input('tel'),
+            'name'      => $request->input('name'),
+            'rif'       => $request->input('rif'),
+            'tel'       => $request->input('tel'),
             'contact_person' => $request->input('contact_person'),
-            'email' => $request->input('email'),
-            'address' => $request->input('address'),
-            'status' => $request->input('status')
+            'email'     => $request->input('email'),
+            'address'   => $request->input('address'),
+            'status'    => Brand::setStatusAttribute($request->status),
         ];
 
-        //valida si trae un objeto tipo file desde el front
-        if( $request->hasFile('logo') ){
-            // borrar imagen del storage
-            Storage::disk('public')->delete(Brands::find($id)->logo);
-            //agregar nueva ruta en la base de datos y gardar el archivo
-            $args['logo'] =  $request->file('logo')->store('brands', 'public');
-        }
-        else{
-            $args['logo'] = Brands::find($id)->logo;
-        }
+        $this->deleteIfYouHaveImage($request, $id);
 
-        Brands::where('id', $id)->update($args);
+        Brand::where('id', $id)->update($args);
 
         return back()
                 ->with('mensaje', $this->messages['update'])
@@ -137,30 +136,36 @@ class BrandController extends Controller
      */
     public function destroy(Request $request, $id)
     {
-        if( !$request->ajax() ) abort(403, 'Error');
-
-        //eliminar la imagen
-        Storage::disk('public')->delete(Brands::find($id)->logo);
-        //elimina la marca
-        Brands::destroy($id);
-
-        $message = $this->messages['delete'];
-
-        return response()->json([
-                                'message' => \View::make('admin.brands.messageDelete', compact('message'))->render()
-                            ]);
-
     }
 
 
     public function getList()
     {
-        return datatables()->eloquent(Brands::query())
+        return datatables()->eloquent(Brand::query())
                 ->addColumn('accion', 'admin.brands.columnButtonAction')
-                ->editColumn('name', function(Brands $brand) {
+                ->editColumn('name', function(Brand $brand) {
                     return '<a href="/admin/marcas/'. $brand->id.'">'. $brand->name . '</a>';
                 })
-                ->rawColumns(['name' => 'name', 'accion' => 'accion'])
+                ->editColumn('status', function(Brand $brand) {
+                    return ($brand->status) ? 'Activo' : 'Inactivo';
+                })
+                ->rawColumns(['name' => 'name', 'accion' => 'accion', 'status' => 'status'])
                 ->toJson();
     }
+
+    private function deleteIfYouHaveImage($request, $id)
+    {
+        //valida si trae un objeto tipo file desde el front
+        if( $request->hasFile('logo') ){
+            // borrar imagen del storage
+            Storage::disk('public')->delete(Brand::find($id)->logo);
+            //agregar nueva ruta en la base de datos y gardar el archivo
+            $args['logo'] =  $request->file('logo')->store('brands', 'public');
+        }
+        else{
+            // si no trae el objeto file se queda con su valor 
+            $args['logo'] = Brand::find($id)->logo;
+        }
+    }
+
 }

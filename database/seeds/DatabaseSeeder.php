@@ -125,33 +125,6 @@ class DatabaseSeeder extends Seeder
         $zone->save();
 
 
-        // Crear Gastronomia
-
-        $type           = new Type();
-        $type->name     =  'Se prendio la rumba';
-        $type->value    = 'lo que nos pueda colaborar';
-        $type->category = 'Evento';
-        $type->save();
-
-        $type             = new Type();
-        $type->name       = 'Pasa un dia diferente';
-        $type->value        = 'lo que nos pueda colaborar';
-        $type->category   = 'Evento';
-        $type->save();
-
-        $type           = new Type();
-        $type->name     = 'Ron';
-        $type->value    = 'lo que nos pueda colaborar';
-        $type->category = 'Evento';
-        $type->save();
-
-        $type           = new Type();
-        $type->name     = 'Cerveza';
-        $type->value    = 'lo que nos pueda colaborar';
-        $type->category = 'Producto';
-        $type->save();
-
-
         // Crear Moneda
 
         $coin            = new Coin();
@@ -159,5 +132,28 @@ class DatabaseSeeder extends Seeder
         $coin->shortname = 'Bolivares';
         $coin->symbol  = 'Bs.S';
         $coin->save();
+
+
+        // Crear tipos
+
+        $type            = new Type();
+        $type->name      = 'Italiana';
+        $type->category  = 'Gastronomia';
+        $type->save();
+
+        $type            = new Type();
+        $type->name      = 'China';
+        $type->category  = 'Gastronomia';
+        $type->save();
+
+        $type            = new Type();
+        $type->name      = 'Venezolana';
+        $type->category  = 'Gastronomia';
+        $type->save();
+
+        $type            = new Type();
+        $type->name      = 'Japonesa';
+        $type->category  = 'Gastronomia';
+        $type->save();
     }
 }

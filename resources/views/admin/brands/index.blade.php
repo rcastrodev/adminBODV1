@@ -28,9 +28,9 @@
 						<th>ID</th>
 				    	<th>Nombre</th>
 				    	<th>RIF</th>
-				    	<th>Pers de contacto</th>
 				    	<th>Tel</th>
 				    	<th>Email</th>
+				    	<th>Estatus</th>
 				    	<th>Acción</th>
 		    		</tr>
 		    	</thead>
@@ -56,9 +56,9 @@
 					{data: 'id'},
 					{data: 'name'},
 					{data: 'rif'},
-					{data: 'contact_person'},
 					{data: 'tel' },
 					{data: 'email'},
+					{data: 'status'},
 					{ data: 'accion', name: 'accion', orderable: false, searchable: false }
 				],
 				language: {

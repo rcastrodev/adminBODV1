@@ -36,9 +36,11 @@
 					<input type="text" class="form-control" id="email" name="email"  value="{{ $brand->email }}">
 				</div>
 				<div class="form-group">
-					<label for="status">Estatus</label>
-					<input type="text" class="form-control" id="status" name="status"  value="{{ $brand->status }}">
-				</div>
+					<div class="custom-control custom-switch">
+						<input type="checkbox" class="custom-control-input" name="status" value="1" id="status">
+						<label class="custom-control-label" for="status">Estatus</label>
+					</div>
+                </div>
 			</div>
 			<!-- /.col -->
 			<div class="col-sm-12 col-md-6">
@@ -84,6 +86,10 @@
 @stop
 @section('js')
 <script>
+	// si estatus es 1 hacer click en el swich de status
+	if({{$brand->status}}){
+		$('#status').trigger('click')
+	}
 	CKEDITOR.replace('address');
 </script>
 @stop

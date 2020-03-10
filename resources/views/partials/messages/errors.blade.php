@@ -3,7 +3,7 @@
 		<div class="col-sm-12 alert alert-danger alert-dismissible">
 			<button type="button" class="close" data-dismiss="alert">×</button>
 			@foreach ($errors->all() as $error)
-				<p> {{ $error }} </p>
+				<span class="mb-0 mr-1"> {{ $error }}, </span>
 			@endforeach
 		</div>		
 	</div>

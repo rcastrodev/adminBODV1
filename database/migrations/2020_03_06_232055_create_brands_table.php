@@ -22,7 +22,7 @@ class CreateBrandsTable extends Migration
             $table->string('email')->unique();
             $table->text('address')->nullable();
             $table->string('logo')->nullable();
-            $table->string('status')->nullable();
+            $table->boolean('status')->default(false);
             $table->timestamps();
         });
     }
