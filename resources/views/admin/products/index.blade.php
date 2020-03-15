@@ -29,7 +29,7 @@
 		  <table class="table" id="table-brands">
 		   	<thead>
 		   		<tr>
-						<th>ID</th>
+					<th>ID</th>
 				   	<th>Nombre</th>
 				   	<th>Abreviación</th>
 				   	<th>Simbolo</th>
