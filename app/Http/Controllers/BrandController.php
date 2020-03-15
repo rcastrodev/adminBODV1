@@ -13,10 +13,10 @@ use App\Brand;
 class BrandController extends Controller
 {
     private $messages = [
-                        'create' => 'Marca guardada exitosamente',
-                        'update' => 'Marca actualizada',
-                        'delete' => 'Marca eliminada con exito'
-                    ];
+                'create' => 'Marca guardada exitosamente',
+                'update' => 'Marca actualizada',
+                'delete' => 'Marca eliminada con exito'
+                ];
 
     /**
      * Display a listing of the resource.
@@ -55,7 +55,7 @@ class BrandController extends Controller
             'contact_person' => $request->input('contact_person'),
             'email'     => $request->input('email'),
             'address'   => $request->input('address'),
-            'logo'      => $file->store('brands', 'public'),
+            'logo'      => $file->store('brands', 'my_img'),
             'status'    => Brand::setStatusAttribute($request->status),
         ];
 
@@ -116,10 +116,9 @@ class BrandController extends Controller
             'contact_person' => $request->input('contact_person'),
             'email'     => $request->input('email'),
             'address'   => $request->input('address'),
+            'logo'      => $this->deleteIfYouHaveImage($request, $id),
             'status'    => Brand::setStatusAttribute($request->status),
         ];
-
-        $this->deleteIfYouHaveImage($request, $id);
 
         Brand::where('id', $id)->update($args);
 
@@ -158,13 +157,12 @@ class BrandController extends Controller
         //valida si trae un objeto tipo file desde el front
         if( $request->hasFile('logo') ){
             // borrar imagen del storage
-            Storage::disk('public')->delete(Brand::find($id)->logo);
+            Storage::disk('my_img')->delete(Brand::find($id)->logo);
             //agregar nueva ruta en la base de datos y gardar el archivo
-            $args['logo'] =  $request->file('logo')->store('brands', 'public');
-        }
-        else{
+            return  $request->file('logo')->store('brands', 'my_img');
+        }else{
             // si no trae el objeto file se queda con su valor 
-            $args['logo'] = Brand::find($id)->logo;
+            return Brand::find($id)->logo;
         }
     }
 

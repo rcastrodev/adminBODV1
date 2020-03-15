@@ -1,25 +1,3 @@
-@extends('adminlte::page')
-@section('css')
-<style>
-	.select2-container{
-		width: 100% !important;
-	}
-</style>
-@stop
-@section('title', 'Establecimientos')
-@section('content_header')
-	<h1>Establecimiento</h1>
-@stop
-@section('content')
-	<div class="pb-5">
-	   @include('admin.establishments.form.create.establishment-of-basic-data')
-       
-	</div>
-@stop
-@section('js')
-	<script>
-		$('.select2').select2()
-
 		$('.select2-p').select2().on('change', function() {
 			var idcountry = this.value;
 			$('.region').select2({
@@ -109,10 +87,3 @@
         		}
 			})
 		})
-
-
-		CKEDITOR.replace('menu')
-		CKEDITOR.replace('description')
-		CKEDITOR.replace('address')
-	</script>
-@stop

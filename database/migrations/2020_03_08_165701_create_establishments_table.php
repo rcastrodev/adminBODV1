@@ -26,7 +26,7 @@ class CreateEstablishmentsTable extends Migration
                                         ->onDelete('cascade')
                                         ->onUpdate('cascade');
 
-            $table->unsignedBigInteger('status'); 
+            $table->boolean('status')->default(false); 
 
             $table->unsignedBigInteger('type_id');
             $table->foreign('type_id')->references('id')->on('types')
@@ -51,8 +51,12 @@ class CreateEstablishmentsTable extends Migration
             $table->unsignedBigInteger('zone_id');                              
             $table->foreign('zone_id')->references('id')->on('zones')
                                         ->onDelete('cascade')
-                                        ->onUpdate('cascade');                                     
-            $table->string('name', 100);
+                                        ->onUpdate('cascade');  
+
+            $table->string('name', 100)->nullable();
+            $table->string('owner_name', 100)->nullable();
+            $table->string('rif', 100)->nullable()->unique();
+            $table->text('address')->nullable();
             $table->string('latitude')->nullable();
             $table->string('length')->nullable();
             $table->string('phone', 50)->nullable();
@@ -62,9 +66,8 @@ class CreateEstablishmentsTable extends Migration
             $table->boolean('publish_on_the_web')->default(false);
             $table->boolean('admit_reservation')->default(false);
             $table->integer('linear_discount')->unsigned();
-            $table->text('menu')->nullable();   
             $table->text('description')->nullable();
-            $table->text('address')->nullable();
+            $table->text('menu')->nullable();   
             $table->timestamps();
         });
     }
