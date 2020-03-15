@@ -52,6 +52,12 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function() {
 	Route::resource('atributos', 'AttributeController');
 
 
+	// Seccion de productos
+	// Configuracion / Monedas
+	Route::get('/productos/get-list', 'ProductController@getList')->name('productos-get-list');
+	Route::resource('productos', 'ProductController');
+
+
 });
 
 Route::get('/admin', 'HomeController@index')->name('home');
