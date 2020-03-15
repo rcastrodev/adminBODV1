@@ -8,11 +8,13 @@
 @stop
 @section('title', 'Establecimientos')
 @section('content_header')
-	<h1>Establecimiento <strong>{{ $establecimiento->name }}</strong></h1>
+	<h1>Establecimiento <strong>{{ $establishment->name }}</strong></h1>
 @stop
 @section('content')
 	<div class="pb-5">
         @include('partials.messages.success')
+        @include('partials.messages.errors')
+        @include('admin.establishments.form.edit.establishment-of-basic-data')
     	@include('admin.establishments.form.edit.image-gallery')
     	@include('admin.establishments.form.edit.seasonal-discount')
     	@include('admin.establishments.form.edit.maximum-number-of-forks')
@@ -114,7 +116,6 @@
                 }
             })
         })
-
 
         CKEDITOR.replace('menu')
         CKEDITOR.replace('description')

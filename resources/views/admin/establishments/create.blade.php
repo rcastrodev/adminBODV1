@@ -13,7 +13,6 @@
 @section('content')
 	<div class="pb-5">
 	   @include('admin.establishments.form.create.establishment-of-basic-data')
-       
 	</div>
 @stop
 @section('js')

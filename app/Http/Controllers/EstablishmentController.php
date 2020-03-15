@@ -11,6 +11,7 @@ use App\Brand;
 use App\Type;
 use App\Establishment;
 use App\Http\Requests\CreateBasicEstablishmentDataRequests;
+use App\Http\Requests\UpdateBasicDataOfStablishmentsRequests;
 use Illuminate\Support\Facades\Storage;
 
 class EstablishmentController extends Controller
@@ -67,17 +68,14 @@ class EstablishmentController extends Controller
             'linear_discount' => $request->input('linear_discount'),
             'description'     => $request->input('description'),
             'menu' => $request->input('menu'),
+            'reservation_email' => $request->input('reservation_email'),
+            'status' => Establishment::validateInputBoolean($request, 'status'),
+            'publish_on_the_web' => Establishment::validateInputBoolean($request, 'publish_on_the_web'),
+            'admit_reservation' => Establishment::validateInputBoolean($request, 'admit_reservation')
         ];
-        //validar para ingresar los campos logicos 
-        $args['status']            = Establishment::validateInputBoolean($request, 'status');
-        $args['reservation_email'] = Establishment::validateInputBoolean($request, 'reservation_email');
-        $args['publish_on_the_web']= Establishment::validateInputBoolean($request, 'publish_on_the_web');
-        $args['admit_reservation'] = Establishment::validateInputBoolean($request, 'admit_reservation');
 
         Establishment::create($args);
-        //obtener el ultimo id para mandar a la vista del edit
         $establishment = Establishment::all()->last();        
-
         return redirect("/admin/establecimientos/{$establishment->id}/edit")
                                         ->withInput()
                                         ->with('mensaje', 'Establecimiento creado con exito');
@@ -102,8 +100,11 @@ class EstablishmentController extends Controller
      */
     public function edit($id)
     {
-        $establecimiento = Establishment::find($id);
-        return view('admin.establishments.edit', compact('establecimiento'));
+        $countries  = Country::all();
+        $brands     = Brand::all();
+        $types      = Type::where('category', 'Gastronomia')->get();
+        $establishment = Establishment::find($id);
+        return view('admin.establishments.edit', compact('establishment', 'countries', 'brands', 'types'));
     }
 
     /**
@@ -113,9 +114,37 @@ class EstablishmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateBasicDataOfStablishmentsRequests $request, $id)
     {
-        //
+        $args = [
+            'user_id'   => $request->input('user_id'),
+            'brand_id'  => $request->input('brand_id'),
+            'type_id'   => $request->input('type_id'),
+            'country_id'=> $request->input('country_id'),
+            'region_id' => $request->input('region_id'),
+            'city_id'   => $request->input('city_id'),
+            'zone_id'   => $request->input('zone_id'),
+            'name'      => $request->input('name'),
+            'owner_name'=> $request->input('owner_name'),
+            'rif'       => $request->input('rif'),
+            'address'   => $request->input('address'),
+            'latitude'  => $request->input('latitude'),
+            'length'    => $request->input('length'),
+            'phone'     => $request->input('phone'),
+            'logo'      => Establishment::deleteIfYouHaveImage($request, $id, 'logo', 'logo'),
+            'main_image'=> Establishment::deleteIfYouHaveImage($request, $id, 'main_image', 'main_image'),
+            'linear_discount' => $request->input('linear_discount'),
+            'description'     => $request->input('description'),
+            'menu'            => $request->input('menu'),
+            'reservation_email' => $request->input('reservation_email'),
+            'status'            => Establishment::validateInputBoolean($request, 'status'),
+            'publish_on_the_web'=> Establishment::validateInputBoolean($request, 'publish_on_the_web'),
+            'admit_reservation' => Establishment::validateInputBoolean($request, 'admit_reservation')
+        ];
+
+        Establishment::where('id', $id)->update($args);     
+        return back()->withInput()->with('mensaje', 'Actualizado');
+
     }
 
     /**
@@ -128,4 +157,6 @@ class EstablishmentController extends Controller
     {
         //
     }
+
+
 }

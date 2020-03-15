@@ -1,7 +1,7 @@
 <?php
 
 namespace App;
-
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Model;
 
 class Establishment extends Model
@@ -11,5 +11,19 @@ class Establishment extends Model
     public static function validateInputBoolean($request, $name)
     {
         return ($request->has($name)) ? true : false;
+    }
+
+    public static function deleteIfYouHaveImage($request, $id, $nameFile, $campo)
+    {
+        //valida si trae un objeto tipo file desde el front
+        if( $request->hasFile($nameFile) ){
+            // borrar imagen del storage
+            Storage::disk('my_img')->delete(self::find($id)->$campo);
+            //agregar nueva ruta en la base de datos y gardar el archivo
+            return  $request->file($nameFile)->store('establishments', 'my_img');
+        }else{
+            // si no trae el objeto file se queda con su valor 
+            return self::find($id)->$campo;
+        }
     }
 }
