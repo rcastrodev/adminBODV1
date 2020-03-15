@@ -34,7 +34,6 @@ class PublicController extends Controller
      */
     public function store(Request $request)
     {
-        //
     }
 
     /**

@@ -62,7 +62,7 @@
 					</div>
 				</div>
 				<div class="input-group mt-5">
-					<img src="{{ Storage::disk('public')->url($brand->logo) }}" alt="" class="img-fluid admin-img-marca">
+					<img src="{{ asset("img/$brand->logo") }}" alt="" class="img-fluid admin-img-marca">
 				</div>
 			</div>
 			<div class="col-sm-12">
