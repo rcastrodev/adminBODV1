@@ -1,5 +1,6 @@
-<form action="" method="" class="card card-default mt-5">
+<form action="/admin/marcas/guardar-galeria-de-establecimiento" method="post" class="card card-default mt-5" enctype="multipart/form-data">
 	@csrf
+	<input type="hidden" name="establishment_id" value="{{$establishment->id}}">
 	<div class="card-header">
 		<h3 class="card-title">Galeria de imágenes</h3>
 		<div class="card-tools">
@@ -50,15 +51,15 @@
 			<div class="col-sm-12 col-md-6">
 				<div class="form-group">
 					<label for="ordenImg1">Ordén</label>
-					<input type="text" name="ordenImg1" class="form-control" id="ordenImg1" placeholder="Ingresar el orden Ej AA, BB ...">
+					<input type="text" name="ordenImg1" class="form-control disable" id="ordenImg1" readonly="" value="AA">
 				</div>
 				<div class="form-group">
 					<label for="ordenImg2">Ordén</label>
-					<input type="text" name="ordenImg2" class="form-control" id="ordenImg2" placeholder="Ingresar el orden Ej AA, BB ...">
+					<input type="text" name="ordenImg2" class="form-control disable" id="ordenImg2" readonly="" value="BB">
 				</div>
 				<div class="form-group">
 					<label for="ordenImg3">Ordén</label>
-					<input type="text" name="ordenImg3" class="form-control" id="ordenImg3" placeholder="Ingresar el orden Ej AA, BB ...">
+					<input type="text" name="ordenImg3" class="form-control disable" id="ordenImg3" readonly="" value="CC">
 				</div>
 			</div>
 		</div>
@@ -70,3 +71,21 @@
 		<a href="https://loyalfeel.com/">Loyalfeel</a>
 	</div>
 </form>
+<div class="card card-default">
+	<div class="card-header">
+		<span>Galería</span>
+	</div>
+	<div class="card-body">
+		<div class="row">
+			@forelse($images as $images)
+				<div class="col-sm-12 col-md-4">
+					<img src="{{ asset("img/$images->ruta") }}" alt="" class="img-fluid">
+				</div>
+			@empty
+				<div class="col-12">Sin registro</div>
+			@endforelse					
+		</div>
+
+	</div>
+	<div class="card-footer"></div>
+</div>
