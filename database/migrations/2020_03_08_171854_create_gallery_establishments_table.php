@@ -19,9 +19,9 @@ class CreateGalleryEstablishmentsTable extends Migration
             $table->foreign('establishment_id')->references('id')->on('establishments')
                                         ->onDelete('cascade')
                                         ->onUpdate('cascade');
-            $table->integer('order');
-            $table->string('name');
-            $table->string('ruta');                    
+            $table->string('order')->nullable();
+            $table->string('name')->nullable();
+            $table->string('ruta')->nullable();                    
             $table->timestamps();
         });
     }

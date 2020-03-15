@@ -13,6 +13,7 @@ use App\Establishment;
 use App\Http\Requests\CreateBasicEstablishmentDataRequests;
 use App\Http\Requests\UpdateBasicDataOfStablishmentsRequests;
 use Illuminate\Support\Facades\Storage;
+use App\GalleryEstablishment;
 
 class EstablishmentController extends Controller
 {
@@ -100,11 +101,12 @@ class EstablishmentController extends Controller
      */
     public function edit($id)
     {
+        $images    = GalleryEstablishment::orderBy('order', 'ASC')->get();
         $countries  = Country::all();
         $brands     = Brand::all();
         $types      = Type::where('category', 'Gastronomia')->get();
         $establishment = Establishment::find($id);
-        return view('admin.establishments.edit', compact('establishment', 'countries', 'brands', 'types'));
+        return view('admin.establishments.edit', compact('establishment', 'countries', 'brands', 'types', 'images'));
     }
 
     /**

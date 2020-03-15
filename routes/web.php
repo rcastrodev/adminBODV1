@@ -24,6 +24,10 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function() {
 	// Establecimeintos
 	Route::resource('establecimientos', 'EstablishmentController');
 
+	//galeria establecimiento
+	Route::post('/marcas/guardar-galeria-de-establecimiento', 'EstablishmentGalleryController@store');
+
+
 	// Configuracion / Paises
 	Route::get('/paises/get-list', 'CountryController@getList')->name('paises-get-list');
 	Route::resource('paises', 'CountryController');
