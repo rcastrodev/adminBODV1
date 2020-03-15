@@ -220,7 +220,7 @@ return [
             'submenu' => [
                 [
                     'text' => 'Adm. Productos',
-                    'url'  => '#',
+                    'url'  => '/admin/productos',
                 ],
                 [
                     'text' => 'Condiciones de Descarga',
