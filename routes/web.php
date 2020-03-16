@@ -26,6 +26,13 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function() {
 
 	// Descuento por tenedores
 	Route::put('/establecimientos/maximum-number-of-forks/update', 'EstablishmentController@updateMaximumNumberOfForks');
+
+	// Horario de apertura
+	Route::post('/establecimientos/opening-hours/update', 'EstablishmentController@updateOpeningHours');
+
+	// Eliminar horario de apertura
+	Route::delete('/establecimientos/opening-hours/delete/{id}', 'EstablishmentController@deleteOpeningHours');
+
 	// Establecimeintos
 	Route::resource('establecimientos', 'EstablishmentController');
 

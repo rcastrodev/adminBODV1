@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Storage;
 use App\GalleryEstablishment;
 use App\SeasonalDiscountEstablishment;
 use App\EstablishmentForks;
+use App\EstablishmentOpeningHours;
 
 class EstablishmentController extends Controller
 {
@@ -121,8 +122,9 @@ class EstablishmentController extends Controller
         $establishment  = Establishment::find($id);
         $seasonalDiscount = SeasonalDiscountEstablishment::find($id);
         $establishmentForks = EstablishmentForks::find($id);
+        $establishmentOpeningHours = EstablishmentOpeningHours::all();
 
-        return view('admin.establishments.edit', compact('establishment', 'countries', 'brands', 'types', 'images', 'seasonalDiscount', 'establishmentForks'));
+        return view('admin.establishments.edit', compact('establishment', 'countries', 'brands', 'types', 'images', 'seasonalDiscount', 'establishmentForks', 'establishmentOpeningHours'));
     }
 
     /**
@@ -199,5 +201,37 @@ class EstablishmentController extends Controller
                         ->update($data);
 
         return back()->with('mensaje', 'Cantidad de tenedores agregado con exito');
+    }
+
+    public function updateOpeningHours(Request $request)
+    {
+        $request->validate([
+            'day'               => 'required',
+            'time_since'        => 'required',
+            'time_until'        => 'required',
+        ], [
+            'day.required'               => 'Día requerido',
+            'time_since.required'        => 'Hora de inicio requerida',
+            'time_until.required'        => 'Hora final requerida',
+        ]);
+
+        $data = request()->except(['_token', '_method']);
+
+        /** 
+        * Valida si exite el dato en la base de datos si 
+        * existe lo actuliza si no lo crea
+        */
+        if (! EstablishmentOpeningHours::validateIfTheDayExists($request))
+            EstablishmentOpeningHours::create($data);
+        else
+            EstablishmentOpeningHours::where('establishment_id', $request->input('establishment_id'))->where('day', $request->input('day'))->update($data);
+
+        return back()->with('mensaje', 'Hora del establecimiento guardada');
+    }
+
+    public function deleteOpeningHours($id)
+    {
+        EstablishmentOpeningHours::where('id', $id)->delete();
+        return back()->with('mensaje', 'Horario de trabajo eliminado');
     }
 }
