@@ -33,11 +33,18 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function() {
 	// Eliminar horario de apertura
 	Route::delete('/establecimientos/opening-hours/delete/{id}', 'EstablishmentController@deleteOpeningHours');
 
+	// Descuento por cantidad de personas
+	Route::post('/establecimientos/discount-for-quantity-of-people', 'EstablishmentController@saveDiscountForQuantityOfPeople');
+	// Eliminar registro de descuento por persona
+	Route::delete('/establecimientos/delete-discount-for-quantity-of-people/{id}', 'EstablishmentController@deleteDiscountForQuantityOfPeople');
+
+	//Galeria establecimiento
+	Route::post('/establecimientos/save-gallery-of-establishment', 'EstablishmentGalleryController@store');
+
+	//Eliminar imágen de la galeria establecimiento
+	Route::delete('/establecimientos/delete-gallery-of-establishment/{id}', 'EstablishmentGalleryController@destroy');
 	// Establecimeintos
 	Route::resource('establecimientos', 'EstablishmentController');
-
-	//galeria establecimiento
-	Route::post('/marcas/guardar-galeria-de-establecimiento', 'EstablishmentGalleryController@store');
 
 
 	// Configuracion / Paises

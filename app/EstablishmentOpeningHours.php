@@ -10,6 +10,6 @@ class EstablishmentOpeningHours extends Model
 
     public static function validateIfTheDayExists($request)
     {
-    	return EstablishmentOpeningHours::where('establishment_id', $request->input('establishment_id'))->where('day', $request->input('day'))->exists(); 
+    	return self::where('establishment_id', $request->input('establishment_id'))->where('day', $request->input('day'))->exists(); 
     }
 }

@@ -17,6 +17,7 @@ use App\GalleryEstablishment;
 use App\SeasonalDiscountEstablishment;
 use App\EstablishmentForks;
 use App\EstablishmentOpeningHours;
+use App\EstablishmentDiscountForNumberOfPeople;
 
 class EstablishmentController extends Controller
 {
@@ -123,8 +124,9 @@ class EstablishmentController extends Controller
         $seasonalDiscount = SeasonalDiscountEstablishment::find($id);
         $establishmentForks = EstablishmentForks::find($id);
         $establishmentOpeningHours = EstablishmentOpeningHours::all();
+        $establishmentDiscountForNumberOfPeoples = EstablishmentDiscountForNumberOfPeople::all();
 
-        return view('admin.establishments.edit', compact('establishment', 'countries', 'brands', 'types', 'images', 'seasonalDiscount', 'establishmentForks', 'establishmentOpeningHours'));
+        return view('admin.establishments.edit', compact('establishment', 'countries', 'brands', 'types', 'images', 'seasonalDiscount', 'establishmentForks', 'establishmentOpeningHours', 'establishmentDiscountForNumberOfPeoples'));
     }
 
     /**
@@ -233,5 +235,29 @@ class EstablishmentController extends Controller
     {
         EstablishmentOpeningHours::where('id', $id)->delete();
         return back()->with('mensaje', 'Horario de trabajo eliminado');
+    }
+
+    public function saveDiscountForQuantityOfPeople(Request $request)
+    {
+        $data = request()->except(['_token', '_method']);
+        //valida si no existe lo crea y si existe lo actualiza
+        if (! EstablishmentDiscountForNumberOfPeople::validateIfTheDayExists($request)) {
+            EstablishmentDiscountForNumberOfPeople::create($request->all());
+        } else {
+            EstablishmentDiscountForNumberOfPeople::where('amount_of_people', $request->input('amount_of_people'))
+                ->update([
+                    'establishment_id' => $request->input('establishment_id'),
+                    'amount_of_people' => $request->input('amount_of_people'),
+                    'discount' => $request->input('discount'),
+                ]);
+        }
+
+        return back()->with('mensaje', 'Agredado descuento por personas');
+    }
+
+    public function deleteDiscountForQuantityOfPeople($id)
+    {
+        EstablishmentDiscountForNumberOfPeople::where('id', $id)->delete();
+        return back()->with('mensaje', 'Descuento eliminado');
     }
 }
