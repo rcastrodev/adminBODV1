@@ -34,10 +34,10 @@
 							<a class="nav-link" href="#tab_4" data-toggle="tab">Max comensales</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="#tab_4" data-toggle="tab">Hrs de ini y fin</a>
+							<a class="nav-link" href="#tab_5" data-toggle="tab">Hrs de ini y fin</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="#tab_4" data-toggle="tab">Desc por comensal</a>
+							<a class="nav-link" href="#tab_6" data-toggle="tab">Desc por comensal</a>
 						</li>
 					</ul>
 				</div>

@@ -21,6 +21,11 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function() {
 	Route::get('/marcas/get-list', 'BrandController@getList')->name('marcas-get-list');
 	Route::resource('marcas', 'BrandController')->except(['destroy']);
 
+	// Descuento estacional en el establecimiento
+	Route::put('/establecimientos/save-seasonal-discount', 'EstablishmentController@saveSeasonalDiscount');
+
+	// Descuento estacional en el establecimiento
+	Route::put('/establecimientos/save-seasonal-discount', 'EstablishmentController@saveSeasonalDiscount');
 	// Establecimeintos
 	Route::resource('establecimientos', 'EstablishmentController');
 

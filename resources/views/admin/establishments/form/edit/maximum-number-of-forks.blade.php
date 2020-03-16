@@ -1,4 +1,4 @@
-<form action="" method="" class="card card-default mt-5">
+<form action="/admin/" method="" class="card card-default mt-5">
 	@csrf
 	<div class="card-header">
 		<h3 class="card-title">Cantidad maxima de tenedores</h3>

@@ -14,6 +14,7 @@ use App\Http\Requests\CreateBasicEstablishmentDataRequests;
 use App\Http\Requests\UpdateBasicDataOfStablishmentsRequests;
 use Illuminate\Support\Facades\Storage;
 use App\GalleryEstablishment;
+use App\SeasonalDiscountEstablishment;
 
 class EstablishmentController extends Controller
 {
@@ -75,8 +76,15 @@ class EstablishmentController extends Controller
             'admit_reservation' => Establishment::validateInputBoolean($request, 'admit_reservation')
         ];
 
+        // crear establecimiento
         Establishment::create($args);
+        //obtener el id del establecimiento
         $establishment = Establishment::all()->last();        
+        //crear la relacion en el descuento estacional
+        SeasonalDiscountEstablishment::create([
+            'establishment_id' => $establishment->id
+        ]);
+
         return redirect("/admin/establecimientos/{$establishment->id}/edit")
                                         ->withInput()
                                         ->with('mensaje', 'Establecimiento creado con exito');
@@ -101,12 +109,15 @@ class EstablishmentController extends Controller
      */
     public function edit($id)
     {
-        $images    = GalleryEstablishment::orderBy('order', 'ASC')->get();
-        $countries  = Country::all();
-        $brands     = Brand::all();
-        $types      = Type::where('category', 'Gastronomia')->get();
-        $establishment = Establishment::find($id);
-        return view('admin.establishments.edit', compact('establishment', 'countries', 'brands', 'types', 'images'));
+        $images         = GalleryEstablishment::orderBy('order', 'ASC')->get();
+        $countries      = Country::all();
+        $brands         = Brand::all();
+        $types          = Type::where('category', 'Gastronomia')->get();
+        $establishment  = Establishment::find($id);
+        $seasonalDiscount = SeasonalDiscountEstablishment::find($id);
+        
+        return view('admin.establishments.edit', compact('establishment', 'countries', 'brands', 'types', 
+            'images', 'seasonalDiscount'));
     }
 
     /**
@@ -160,5 +171,29 @@ class EstablishmentController extends Controller
         //
     }
 
+    public function saveSeasonalDiscount(Request $request)
+    {
+        $request->validate([
+            'time_since' => 'required',
+            'time_until' => 'required',
+        ], [
+            'time_since.required' => 'El campo hora es obligatorio',
+            'time_until.required' => 'El campo hora es obligatorio',            
+        ]);
 
+        SeasonalDiscountEstablishment::where('establishment_id', $request->input('establishment_id'))
+                                    ->update([
+                                        'time_since'    => $request->input('time_since'),
+                                        'time_until'    => $request->input('time_until'),
+                                        'monday'        => $request->input('monday'),
+                                        'tuesday'       => $request->input('tuesday'),
+                                        'wednesday'     => $request->input('wednesday'),
+                                        'thursday'      => $request->input('thursday'),
+                                        'friday'        => $request->input('friday'),
+                                        'saturday'      => $request->input('saturday'),
+                                        'sunday'        => $request->input('sunday')
+                                    ]);
+
+        return back()->with('mensaje', 'Cargado exitosamente el descuento estacional');
+    }
 }
