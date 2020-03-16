@@ -1,5 +1,7 @@
-<form action="/admin/" method="" class="card card-default mt-5">
+<form action="/admin/establecimientos/maximum-number-of-forks/update" method="post" class="card card-default mt-5">
 	@csrf
+	@method('PUT')
+	<input type="hidden" name="establishment_id" value="{{$establishment->id}}">
 	<div class="card-header">
 		<h3 class="card-title">Cantidad maxima de tenedores</h3>
 		<div class="card-tools">
@@ -24,37 +26,37 @@
 				<tr>
 					<td>
 						<div class="form-group">
-							<input type="number" name="cMaxTenedoresLunes" class="form-control" id="" placeholder="" min="1" max="100">
+							<input type="number" name="monday" class="form-control" value="{{$establishmentForks->monday}}" min="1" max="100">
 						</div>						
 					</td>
 					<td>
 						<div class="form-group">
-							<input type="number" name="cMaxTenedoresMartes" class="form-control" id="" placeholder="" min="1" max="100">
+							<input type="number" name="tuesday" class="form-control" value="{{$establishmentForks->tuesday}}" min="1" max="100">
 						</div>						
 					</td>
 					<td>
 						<div class="form-group">
-							<input type="number" name="cMaxTenedoresMiercoles" class="form-control" id="" placeholder="" min="1" max="100">
+							<input type="number" name="wednesday" class="form-control" value="{{$establishmentForks->wednesday}}"  min="1" max="100">
 						</div>						
 					</td>
 					<td>
 						<div class="form-group">
-							<input type="number" name="cMaxTenedoresJueves" class="form-control" id="" placeholder="" min="1" max="100">
+							<input type="number" name="thursday" class="form-control" value="{{$establishmentForks->thursday}}" min="1" max="100">
 						</div>						
 					</td>
 					<td>
 						<div class="form-group">
-							<input type="number" name="cMaxTenedoresViernes" class="form-control" id="" placeholder="" min="1" max="100">
+							<input type="number" name="friday" class="form-control" value="{{$establishmentForks->friday}}" min="1" max="100">
 						</div>						
 					</td>
 					<td>
 						<div class="form-group">
-							<input type="number" name="cMaxTenedoresSabado" class="form-control" id="" placeholder="" min="1" max="100">
+							<input type="number" name="saturday" class="form-control" value="{{$establishmentForks->saturday}}" min="1" max="100">
 						</div>						
 					</td>
 					<td>
 						<div class="form-group">
-							<input type="number" name="cMaxTenedoresDomingo" class="form-control" id="" placeholder="" min="1" max="100">
+							<input type="number" name="sunday" class="form-control" value="{{$establishmentForks->sunday}}" min="1" max="100">
 						</div>						
 					</td>
 				</tr>

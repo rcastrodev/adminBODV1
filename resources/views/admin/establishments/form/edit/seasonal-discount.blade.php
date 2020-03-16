@@ -1,4 +1,4 @@
-<form action="/admin/establecimientos/save-seasonal-discount" method="post" class="card card-default mt-5">
+<form action="/admin/establecimientos/save-seasonal-discount/update" method="post" class="card card-default mt-5">
 	@csrf
 	@method('PUT')
 	<input type="hidden" name="establishment_id" value="{{$establishment->id}}">

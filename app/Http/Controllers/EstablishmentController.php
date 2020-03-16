@@ -15,6 +15,7 @@ use App\Http\Requests\UpdateBasicDataOfStablishmentsRequests;
 use Illuminate\Support\Facades\Storage;
 use App\GalleryEstablishment;
 use App\SeasonalDiscountEstablishment;
+use App\EstablishmentForks;
 
 class EstablishmentController extends Controller
 {
@@ -84,6 +85,10 @@ class EstablishmentController extends Controller
         SeasonalDiscountEstablishment::create([
             'establishment_id' => $establishment->id
         ]);
+        //crear la relacion en el descuento estacional
+        EstablishmentForks::create([
+            'establishment_id' => $establishment->id
+        ]);
 
         return redirect("/admin/establecimientos/{$establishment->id}/edit")
                                         ->withInput()
@@ -115,9 +120,9 @@ class EstablishmentController extends Controller
         $types          = Type::where('category', 'Gastronomia')->get();
         $establishment  = Establishment::find($id);
         $seasonalDiscount = SeasonalDiscountEstablishment::find($id);
-        
-        return view('admin.establishments.edit', compact('establishment', 'countries', 'brands', 'types', 
-            'images', 'seasonalDiscount'));
+        $establishmentForks = EstablishmentForks::find($id);
+
+        return view('admin.establishments.edit', compact('establishment', 'countries', 'brands', 'types', 'images', 'seasonalDiscount', 'establishmentForks'));
     }
 
     /**
@@ -171,7 +176,7 @@ class EstablishmentController extends Controller
         //
     }
 
-    public function saveSeasonalDiscount(Request $request)
+    public function updateSeasonalDiscount(Request $request)
     {
         $request->validate([
             'time_since' => 'required',
@@ -180,20 +185,19 @@ class EstablishmentController extends Controller
             'time_since.required' => 'El campo hora es obligatorio',
             'time_until.required' => 'El campo hora es obligatorio',            
         ]);
-
+        $data = request()->except(['_token', '_method']);
         SeasonalDiscountEstablishment::where('establishment_id', $request->input('establishment_id'))
-                                    ->update([
-                                        'time_since'    => $request->input('time_since'),
-                                        'time_until'    => $request->input('time_until'),
-                                        'monday'        => $request->input('monday'),
-                                        'tuesday'       => $request->input('tuesday'),
-                                        'wednesday'     => $request->input('wednesday'),
-                                        'thursday'      => $request->input('thursday'),
-                                        'friday'        => $request->input('friday'),
-                                        'saturday'      => $request->input('saturday'),
-                                        'sunday'        => $request->input('sunday')
-                                    ]);
+                                    ->update($data);
 
         return back()->with('mensaje', 'Cargado exitosamente el descuento estacional');
+    }
+
+    public function updateMaximumNumberOfForks(Request $request)
+    {
+        $data = request()->except(['_token', '_method']);
+        EstablishmentForks::where('establishment_id', $request->input('establishment_id'))
+                        ->update($data);
+
+        return back()->with('mensaje', 'Cantidad de tenedores agregado con exito');
     }
 }

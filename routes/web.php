@@ -22,10 +22,10 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function() {
 	Route::resource('marcas', 'BrandController')->except(['destroy']);
 
 	// Descuento estacional en el establecimiento
-	Route::put('/establecimientos/save-seasonal-discount', 'EstablishmentController@saveSeasonalDiscount');
+	Route::put('/establecimientos/save-seasonal-discount/update', 'EstablishmentController@updateSeasonalDiscount');
 
-	// Descuento estacional en el establecimiento
-	Route::put('/establecimientos/save-seasonal-discount', 'EstablishmentController@saveSeasonalDiscount');
+	// Descuento por tenedores
+	Route::put('/establecimientos/maximum-number-of-forks/update', 'EstablishmentController@updateMaximumNumberOfForks');
 	// Establecimeintos
 	Route::resource('establecimientos', 'EstablishmentController');
 
@@ -62,7 +62,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function() {
 
 
 	// Seccion de productos
-	// Configuracion / Productos
+	// Configuracion / Monedas
 	Route::get('/productos/get-list', 'ProductController@getList')->name('productos-get-list');
 	Route::resource('productos', 'ProductController');
 
