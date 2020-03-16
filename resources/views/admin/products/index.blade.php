@@ -29,10 +29,9 @@
 		  <table class="table" id="table-brands">
 		   	<thead>
 		   		<tr>
-						<th>ID</th>
+					<th>ID</th>
 				   	<th>Nombre</th>
-				   	<th>Abreviación</th>
-				   	<th>Simbolo</th>
+				   	<th>Categoria</th>
 				   	<th>Acción</th>
 		   		</tr>
 		   	</thead>
@@ -48,24 +47,4 @@
 @stop
 
 @section('js')
-<script src="{{ asset('js/coins/deleteCoin.js') }}"></script>
-<script>
-	$(document).ready(function(){
-
-		$('#table-brands').DataTable({
-			'serverSide' : true,
-			'ajax' 		 : "{{ route('productos-get-list') }}",
-			'columns'    : [
-				{data: 'id'},
-				{data: 'name'},
-				{data: 'shortname'},
-				{data: 'symbol'},
-				{ data: 'accion', name: 'accion', orderable: false, searchable: false }
-			],
-			language: {
-         url: "//cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json",
-      }, 
-		})
-	})
-</script>
 @stop
