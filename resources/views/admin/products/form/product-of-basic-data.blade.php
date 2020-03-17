@@ -36,15 +36,20 @@
 	</div>
 	<div class="col-sm-12 col-md-6">
 		<div class="form-group">
-			<label for="tipo_producto_id">Tipo de Producto <span style="color: red;">*</span></label>
-			<select name="tipo_producto_id" class="form-control select2" style="width: 100%;" id="tipo_producto_id" onchange="tipoProducto()">
-				<option value="">Seleccione un tipo ...</option>
-				@foreach($types as $type)
-					@if($type->category == NULL)
-					<option value="{{ $type->id }}">{{ $type->name }}</option>
-					@endif
-				@endforeach
-			</select>
+			<label for="tipo_producto_id">Dirección <span style="color: red;">*</span></label>
+			<input type="text" name="" value="" class="form-control">
+		</div>
+	</div>
+	<div class="col-sm-12 col-md-6">
+		<div class="form-group">
+			<label for="tipo_producto_id">Fecha Evento <span style="color: red;">*</span></label>
+			<input type="date" name="" class="form-control">
+		</div>
+	</div>
+	<div class="col-sm-12 col-md-6">
+		<div class="form-group">
+			<label for="tipo_producto_id">Hora Evento <span style="color: red;">*</span></label>
+			<input type="time" name="" class="form-control">
 		</div>
 	</div>
 </div>
@@ -198,8 +203,15 @@ $("#logo").change(function () {
 function tipoProducto() {
 	var tipoProducto = $('#tipo_producto_id option:selected').text();
 	if (tipoProducto == 'Evento') {
-		$('#linkTab_3').hide();
-		$('#tab_3').hide();
+		$('#linkTab_3').html('');
+		$('#tab_3').html('');
+
+		$('#linkTab_4').html('');
+		$('#tab_4').html('');
+
+		$('#linkTab_6').html('');
+		$('#tab_6').html('');
+		
 		$('#tipo_producto_id').prop('disabled', true);
 	}
 }

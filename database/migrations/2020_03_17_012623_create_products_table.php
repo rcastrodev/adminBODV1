@@ -25,6 +25,7 @@ class CreateProductsTable extends Migration
             $table->boolean('estatus')->nullable();
             $table->longText('description')->nullable();
             $table->string('nombre')->nullable();
+            $table->string('direccion')->nullable();
             $table->string('logo')->nullable();
             $table->string('imagen_principal')->nullable();
             $table->boolean('publicado_web')->nullable();
@@ -37,6 +38,7 @@ class CreateProductsTable extends Migration
             $table->boolean('afiliado_gratis')->nullable();
             $table->boolean('afiliado_na')->nullable();
             $table->timestamp('fecha_producto')->nullable();
+            $table->string('hora_producto')->nullable();
             $table->timestamps();
         });
     }
