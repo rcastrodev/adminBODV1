@@ -118,8 +118,8 @@ class EstablishmentController extends Controller
         $brands         = Brand::all();
         $types          = Type::where('category', 'Gastronomia')->get();
         $establishment  = Establishment::find($id);
+        $establishmentForks = EstablishmentForks::getEstablishmentForkOCreateObject($id);
         $seasonalDiscounts   = SeasonalDiscountEstablishment::where('establishment_id', $id)->get();
-        $establishmentForks = EstablishmentForks::find($id);
         $establishmentOpeningHours = EstablishmentOpeningHours::all();
         $establishmentDiscountForNumberOfPeoples = EstablishmentDiscountForNumberOfPeople::all();
 
