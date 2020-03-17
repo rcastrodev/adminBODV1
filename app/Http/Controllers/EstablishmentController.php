@@ -14,6 +14,10 @@ use App\Http\Requests\CreateBasicEstablishmentDataRequests;
 use App\Http\Requests\UpdateBasicDataOfStablishmentsRequests;
 use Illuminate\Support\Facades\Storage;
 use App\GalleryEstablishment;
+use App\SeasonalDiscountEstablishment;
+use App\EstablishmentForks;
+use App\EstablishmentOpeningHours;
+use App\EstablishmentDiscountForNumberOfPeople;
 
 class EstablishmentController extends Controller
 {
@@ -75,8 +79,19 @@ class EstablishmentController extends Controller
             'admit_reservation' => Establishment::validateInputBoolean($request, 'admit_reservation')
         ];
 
+        // crear establecimiento
         Establishment::create($args);
+        //obtener el id del establecimiento
         $establishment = Establishment::all()->last();        
+        //crear la relacion en el descuento estacional
+        SeasonalDiscountEstablishment::create([
+            'establishment_id' => $establishment->id
+        ]);
+        //crear la relacion en el descuento estacional
+        EstablishmentForks::create([
+            'establishment_id' => $establishment->id
+        ]);
+
         return redirect("/admin/establecimientos/{$establishment->id}/edit")
                                         ->withInput()
                                         ->with('mensaje', 'Establecimiento creado con exito');
@@ -101,12 +116,17 @@ class EstablishmentController extends Controller
      */
     public function edit($id)
     {
-        $images    = GalleryEstablishment::orderBy('order', 'ASC')->get();
-        $countries  = Country::all();
-        $brands     = Brand::all();
-        $types      = Type::where('category', 'Gastronomia')->get();
-        $establishment = Establishment::find($id);
-        return view('admin.establishments.edit', compact('establishment', 'countries', 'brands', 'types', 'images'));
+        $images         = GalleryEstablishment::orderBy('order', 'ASC')->get();
+        $countries      = Country::all();
+        $brands         = Brand::all();
+        $types          = Type::where('category', 'Gastronomia')->get();
+        $establishment  = Establishment::find($id);
+        $seasonalDiscount = SeasonalDiscountEstablishment::find($id);
+        $establishmentForks = EstablishmentForks::find($id);
+        $establishmentOpeningHours = EstablishmentOpeningHours::all();
+        $establishmentDiscountForNumberOfPeoples = EstablishmentDiscountForNumberOfPeople::all();
+
+        return view('admin.establishments.edit', compact('establishment', 'countries', 'brands', 'types', 'images', 'seasonalDiscount', 'establishmentForks', 'establishmentOpeningHours', 'establishmentDiscountForNumberOfPeoples'));
     }
 
     /**
@@ -160,5 +180,84 @@ class EstablishmentController extends Controller
         //
     }
 
+    public function updateSeasonalDiscount(Request $request)
+    {
+        $request->validate([
+            'time_since' => 'required',
+            'time_until' => 'required',
+        ], [
+            'time_since.required' => 'El campo hora es obligatorio',
+            'time_until.required' => 'El campo hora es obligatorio',            
+        ]);
+        $data = request()->except(['_token', '_method']);
+        SeasonalDiscountEstablishment::where('establishment_id', $request->input('establishment_id'))
+                                    ->update($data);
 
+        return back()->with('mensaje', 'Cargado exitosamente el descuento estacional');
+    }
+
+    public function updateMaximumNumberOfForks(Request $request)
+    {
+        $data = request()->except(['_token', '_method']);
+        EstablishmentForks::where('establishment_id', $request->input('establishment_id'))
+                        ->update($data);
+
+        return back()->with('mensaje', 'Cantidad de tenedores agregado con exito');
+    }
+
+    public function updateOpeningHours(Request $request)
+    {
+        $request->validate([
+            'day'               => 'required',
+            'time_since'        => 'required',
+            'time_until'        => 'required',
+        ], [
+            'day.required'               => 'Día requerido',
+            'time_since.required'        => 'Hora de inicio requerida',
+            'time_until.required'        => 'Hora final requerida',
+        ]);
+
+        $data = request()->except(['_token', '_method']);
+
+        /** 
+        * Valida si exite el dato en la base de datos si 
+        * existe lo actuliza si no lo crea
+        */
+        if (! EstablishmentOpeningHours::validateIfTheDayExists($request))
+            EstablishmentOpeningHours::create($data);
+        else
+            EstablishmentOpeningHours::where('establishment_id', $request->input('establishment_id'))->where('day', $request->input('day'))->update($data);
+
+        return back()->with('mensaje', 'Hora del establecimiento guardada');
+    }
+
+    public function deleteOpeningHours($id)
+    {
+        EstablishmentOpeningHours::where('id', $id)->delete();
+        return back()->with('mensaje', 'Horario de trabajo eliminado');
+    }
+
+    public function saveDiscountForQuantityOfPeople(Request $request)
+    {
+        $data = request()->except(['_token', '_method']);
+        //valida si no existe lo crea y si existe lo actualiza
+        if (! EstablishmentDiscountForNumberOfPeople::validateIfTheDayExists($request)) {
+            EstablishmentDiscountForNumberOfPeople::create($request->all());
+        } else {
+            EstablishmentDiscountForNumberOfPeople::where('amount_of_people', $request->input('amount_of_people'))
+                ->update([
+                    'establishment_id' => $request->input('establishment_id'),
+                    'amount_of_people' => $request->input('amount_of_people'),
+                    'discount' => $request->input('discount'),
+                ]);
+        }
+
+        return back()->with('mensaje', 'Agredado descuento por personas');
+    }
+
+    public function deleteDiscountForQuantityOfPeople($id)
+    {
+        EstablishmentDiscountForNumberOfPeople::where('id', $id)->delete();
+        return back()->with('mensaje', 'Descuento eliminado');
+    }
 }

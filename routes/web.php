@@ -21,11 +21,30 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function() {
 	Route::get('/marcas/get-list', 'BrandController@getList')->name('marcas-get-list');
 	Route::resource('marcas', 'BrandController')->except(['destroy']);
 
+	// Descuento estacional en el establecimiento
+	Route::put('/establecimientos/save-seasonal-discount/update', 'EstablishmentController@updateSeasonalDiscount');
+
+	// Descuento por tenedores
+	Route::put('/establecimientos/maximum-number-of-forks/update', 'EstablishmentController@updateMaximumNumberOfForks');
+
+	// Horario de apertura
+	Route::post('/establecimientos/opening-hours/update', 'EstablishmentController@updateOpeningHours');
+
+	// Eliminar horario de apertura
+	Route::delete('/establecimientos/opening-hours/delete/{id}', 'EstablishmentController@deleteOpeningHours');
+
+	// Descuento por cantidad de personas
+	Route::post('/establecimientos/discount-for-quantity-of-people', 'EstablishmentController@saveDiscountForQuantityOfPeople');
+	// Eliminar registro de descuento por persona
+	Route::delete('/establecimientos/delete-discount-for-quantity-of-people/{id}', 'EstablishmentController@deleteDiscountForQuantityOfPeople');
+
+	//Galeria establecimiento
+	Route::post('/establecimientos/save-gallery-of-establishment', 'EstablishmentGalleryController@store');
+
+	//Eliminar imágen de la galeria establecimiento
+	Route::delete('/establecimientos/delete-gallery-of-establishment/{id}', 'EstablishmentGalleryController@destroy');
 	// Establecimeintos
 	Route::resource('establecimientos', 'EstablishmentController');
-
-	//galeria establecimiento
-	Route::post('/marcas/guardar-galeria-de-establecimiento', 'EstablishmentGalleryController@store');
 
 
 	// Configuracion / Paises
@@ -57,7 +76,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function() {
 
 
 	// Seccion de productos
-	// Configuracion / Productos
+	// Configuracion / Monedas
 	Route::get('/productos/get-list', 'ProductController@getList')->name('productos-get-list');
 	Route::resource('productos', 'ProductController');
 

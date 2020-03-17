@@ -19,25 +19,25 @@
 			<!-- Custom Tabs -->
 			<div class="card">
 				<div class="card-header d-flex p-0">
-					<h3 class="card-title p-3">Crear producto <a href="/admin/productos" class="ml-3 btn btn-sm btn-primary">Ver productos</a></h3>
+					<h3 class="card-title p-3"><a href="/admin/establecimientos" class="ml-3 btn btn-sm btn-primary">Ver Establecimientos</a></h3>
 					<ul class="nav nav-pills ml-auto p-2">
 						<li class="nav-item">
-							<a class="nav-link active" href="#tab_1" data-toggle="tab">Datos</a>
+							<a class="nav-link active" href="#tab_1" data-toggle="tab">Datos Basicos</a>
 						</li>
 						<li class="nav-item">
 							<a class="nav-link" href="#tab_2" data-toggle="tab">Galería</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="#tab_3" data-toggle="tab">Desc estacional</a>
+							<a class="nav-link" href="#tab_3" data-toggle="tab">Descuento estacional</a>
 						</li>
 						<li class="nav-item">
 							<a class="nav-link" href="#tab_4" data-toggle="tab">Max comensales</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="#tab_4" data-toggle="tab">Hrs de ini y fin</a>
+							<a class="nav-link" href="#tab_5" data-toggle="tab">Hora de ini y fin</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="#tab_4" data-toggle="tab">Desc por comensal</a>
+							<a class="nav-link" href="#tab_6" data-toggle="tab">Desc por comensal</a>
 						</li>
 					</ul>
 				</div>
