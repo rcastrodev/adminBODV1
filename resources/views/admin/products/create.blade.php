@@ -17,22 +17,22 @@
       <div class="card-header d-flex p-0">
         <h3 class="card-title p-3">Crear producto</h3>
         <ul class="nav nav-pills ml-auto p-2">
-          <li class="nav-item">
+          <li class="nav-item" id="linkTab_1">
           	<a class="nav-link active" href="#tab_1" data-toggle="tab">Detalles</a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item" id="linkTab_2">
           	<a class="nav-link" href="#tab_2" data-toggle="tab">Galería de Imágenes</a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item" id="linkTab_3">
           	<a class="nav-link" href="#tab_3" data-toggle="tab">Establecimientos</a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item" id="linkTab_4">
             <a class="nav-link" href="#tab_4" data-toggle="tab">Condiciones</a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item" id="linkTab_5">
             <a class="nav-link" href="#tab_5" data-toggle="tab">Inventario</a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item" id="linkTab_6">
             <a class="nav-link" href="#tab_6" data-toggle="tab">Productos Hijos</a>
           </li>
         </ul>

@@ -10,7 +10,34 @@
 	<div class="col-sm-12 col-md-6">
 		<div class="form-group">
 			<label for="tipo_producto_id">Tipo de Producto <span style="color: red;">*</span></label>
-			<select name="tipo_producto_id" class="form-control select2" style="width: 100%;" id="tipo_producto_id">
+			<select name="tipo_producto_id" class="form-control select2" style="width: 100%;" id="tipo_producto_id" onchange="tipoProducto()">
+				<option value="">Seleccione un tipo ...</option>
+				@foreach($types as $type)
+					@if($type->category == NULL)
+					<option value="{{ $type->id }}">{{ $type->name }}</option>
+					@endif
+				@endforeach
+			</select>
+		</div>
+	</div>
+</div>
+
+<div class="row" id="tipoEventoContent">
+	<div class="col-sm-12 col-md-6">
+		<div class="form-group">
+			<label for="nombre">Establecimiento <span style="color: red;">*</span></label>
+			<select name="establecimiento" class="form-control select2" style="width: 100%;" id="establecimiento">
+				<option value="">Seleccione un establecimiento ...</option>
+				@foreach($establishments as $establishment)
+					<option value="{{ $establishment->id }}">{{ $establishment->name }}</option>
+				@endforeach
+			</select>
+		</div>
+	</div>
+	<div class="col-sm-12 col-md-6">
+		<div class="form-group">
+			<label for="tipo_producto_id">Tipo de Producto <span style="color: red;">*</span></label>
+			<select name="tipo_producto_id" class="form-control select2" style="width: 100%;" id="tipo_producto_id" onchange="tipoProducto()">
 				<option value="">Seleccione un tipo ...</option>
 				@foreach($types as $type)
 					@if($type->category == NULL)
@@ -167,4 +194,13 @@ $("#imagen_principal").change(function () {
 $("#logo").change(function () {
     filePreviewLogo(this);
 });
+
+function tipoProducto() {
+	var tipoProducto = $('#tipo_producto_id option:selected').text();
+	if (tipoProducto == 'Evento') {
+		$('#linkTab_3').hide();
+		$('#tab_3').hide();
+		$('#tipo_producto_id').prop('disabled', true);
+	}
+}
 </script>

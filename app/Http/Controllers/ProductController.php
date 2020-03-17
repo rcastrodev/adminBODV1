@@ -9,6 +9,7 @@ use App\Coin;
 use App\Type;
 use App\Condition;
 use App\Product;
+use App\Establishment;
 
 class ProductController extends Controller
 {
@@ -39,7 +40,8 @@ class ProductController extends Controller
     $types = Type::All();
     $conditions = Condition::All();
     $products = Product::All();
-    return view('admin.products.create', compact('coins', 'types', 'conditions', 'products'));
+    $establishments = Establishment::All();
+    return view('admin.products.create', compact('coins', 'types', 'conditions', 'products', 'establishments'));
   }
 
   /**

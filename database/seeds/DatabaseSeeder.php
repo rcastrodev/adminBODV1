@@ -10,8 +10,6 @@ use App\Zone;
 use App\Gastronomy;
 use App\Type;
 use App\Coin;
-use App\Attribute;
-use App\Condition;
 
 class DatabaseSeeder extends Seeder
 {
@@ -30,25 +28,25 @@ class DatabaseSeeder extends Seeder
         $role->role = 'Súper Administrador';
         $role->save();
 
-		$role = new Role();
+        $role = new Role();
         $role->role = 'Administrador de Contenido';
         $role->save();
 
-		$role = new Role();
+        $role = new Role();
         $role->role = 'Aliado';
         $role->save();
 
         // Crear usuario admin
 
-    	$user = new User();
-    	$user->name  	= 'Admin';
-    	$user->email  	= 'admin@admin.com';
-    	$user->password = Hash::make('1234');
-    	$user->role_id  = 1;
-    	$user->save();
+        $user = new User();
+        $user->name     = 'Admin';
+        $user->email    = 'admin@admin.com';
+        $user->password = Hash::make('1234');
+        $user->role_id  = 1;
+        $user->save();
 
 
-    	// Crear Paises
+        // Crear Paises
 
         $country = new Country();
         $country->name = 'Colombia';
@@ -89,21 +87,21 @@ class DatabaseSeeder extends Seeder
         $city->region_id  = 1;
         $city->country_id = 2;
         $city->name       = 'Caracas';
-        $city->code 	  = '0001';
+        $city->code       = '0001';
         $city->save();
 
         $city = new City();
         $city->region_id  = 3;
         $city->country_id = 2;
         $city->name       = 'Valencia';
-        $city->code 	  = '0002';
+        $city->code       = '0002';
         $city->save();
 
         $city = new City();
         $city->region_id  = 2;
         $city->country_id = 2;
         $city->name       = 'Maracaibo';
-        $city->code 	  = '0003';
+        $city->code       = '0003';
         $city->save();
 
         // Crear Zonas
@@ -173,6 +171,7 @@ class DatabaseSeeder extends Seeder
         $type->category  = NULL;
         $type->save();
 
+
         // Crear condiciones
 
         $condition                 = new Condition();
@@ -181,5 +180,8 @@ class DatabaseSeeder extends Seeder
         $condition->cantidadTiempo = 3;
         $condition->tipoTiempo     = NULL;
         $condition->save();
+
+        factory(App\Brand::class, 50)->create();
+        factory(App\Establishment::class, 200)->create();
     }
 }
