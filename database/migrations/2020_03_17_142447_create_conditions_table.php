@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAttributesTable extends Migration
+class CreateConditionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class CreateAttributesTable extends Migration
      */
     public function up()
     {
-        Schema::create('attributes', function (Blueprint $table) {
+        Schema::create('conditions', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('key')->unique();
-            $table->string('value');
-            $table->string('use')->nullable();
+            $table->boolean('estatus')->nullable();
+            $table->string('nombre')->nullable();
+            $table->integer('cantidadTiempo')->nullable();
+            $table->integer('tipoTiempo')->nullable();
             $table->timestamps();
         });
     }
@@ -29,6 +30,6 @@ class CreateAttributesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('attributes');
+        Schema::dropIfExists('conditions');
     }
 }

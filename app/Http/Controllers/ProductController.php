@@ -3,8 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\CreateProductsRequest;
+
 use App\Coin;
 use App\Type;
+use App\Condition;
+use App\Product;
 
 class ProductController extends Controller
 {
@@ -33,7 +37,9 @@ class ProductController extends Controller
   {
     $coins = Coin::All();
     $types = Type::All();
-    return view('admin.products.create', compact('coins', 'types'));
+    $conditions = Condition::All();
+    $products = Product::All();
+    return view('admin.products.create', compact('coins', 'types', 'conditions', 'products'));
   }
 
   /**
@@ -42,9 +48,20 @@ class ProductController extends Controller
   * @param  \Illuminate\Http\Request  $request
   * @return \Illuminate\Http\Response
   */
-  public function store(Request $request)
+  public function store(CreateProductsRequest $request)
   {
-    return response()->json(['request' => $request->all()]);
+    $args = [
+      'nombre'      => $request->input('nombre'),
+    ];
+
+    try {
+      Product::create($args);
+      $ultimoRegistro = Product::all()->last();
+
+      return response()->json(['message' => 'creado']);
+    } catch (Exception $e) {
+      return response()->json(['message' => $e]);
+    }
   }
 
   /**

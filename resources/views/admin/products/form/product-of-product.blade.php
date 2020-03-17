@@ -7,6 +7,9 @@
 				<div class="col-sm-12 col-md-8">
 					<select name="brand_id" class="form-control select2" style="width: 100%;">
 						<option value="">Seleccione un producto ...</option>
+						@foreach($products as $product)
+						<option value="{{ $product->id }}">{{ $product->nombre }}</option>
+						@endforeach
 					</select>
 				</div>
 				<div class="col-sm-12 col-md-4">

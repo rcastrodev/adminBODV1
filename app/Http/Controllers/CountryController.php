@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\CreateCountriesRequest;
 
 use Yajra\DataTables\DataTables;
 use App\Country; 
@@ -41,12 +42,12 @@ class CountryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateCountriesRequest $request)
     {
         $args = [
-            'name'      => $request->input('name'),
-            'iso'       => $request->input('iso'),
-            'utc'       => $request->input('utc')
+            'name' => $request->input('name'),
+            'iso'  => $request->input('iso'),
+            'utc'  => $request->input('utc')
         ];
 
         Country::create($args);
