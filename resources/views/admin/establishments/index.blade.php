@@ -17,15 +17,20 @@
 	</div>
 	<!-- /.card-header -->
 	<div class="card-body">
-		<!-- /.row -->
-		<div class="row">
-			<div class="col-sm-12 col-md-6">				
-			</div>
-			<div class="col-sm-12 col-md-6">
-				
-			</div>
+		<div class="table-responsive">
+		  	<table class="table" id="table-establishment">
+		    	<thead>
+		    		<tr>
+				    	<th>Nombre</th>
+				    	<th>Gastronomía</th>
+				    	<th>País</th>
+				    	<th>Ciudad</th>
+				    	<th>Estatus</th>
+				    	<th>Acción</th>
+		    		</tr>
+		    	</thead>
+		  	</table>
 		</div>
-		<!-- /.row -->
 	</div>
 	<!-- /.card-body -->
 	<div class="card-footer">
@@ -34,4 +39,24 @@
 </div>
 @stop
 @section('js')
+	<script>
+		$(document).ready(function(){
+
+			$('#table-establishment').DataTable({
+				'serverSide' : true,
+				'ajax' 		 : "{{ route('establishment-get-list') }}",
+				'columns'    : [
+					{data: 'name'},
+					{data: 'gastronomy', name: "types.name"},
+					{data: 'country' , name: "countries.name"},
+					{data: 'city' , name: "cities.name"},
+					{data: 'status'},
+					{ data: 'accion', name: 'accion', orderable: false, searchable: false }
+				],
+				language: {
+            			url: "//cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json",
+        			}, 
+			})
+		})
+	</script>
 @stop

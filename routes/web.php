@@ -11,8 +11,7 @@
 |
 */
 
-Route::get('/', 'PublicController@index')->name('public');
-Route::get('/ofertas-gastronomicas', 'OfertasGastronomicasController@index')->name('ofertas-gastronomicas');
+
 
 Auth::routes(['register' => false]);
 
@@ -22,7 +21,9 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function() {
 	Route::resource('marcas', 'BrandController')->except(['destroy']);
 
 	// Descuento estacional en el establecimiento
-	Route::put('/establecimientos/save-seasonal-discount/update', 'EstablishmentController@updateSeasonalDiscount');
+	Route::put('/establecimientos/save-seasonal-discount/update', 'EstablishmentController@saveSeasonalDiscount');
+	// Eliminar descuento estacional en el establecimiento
+	Route::delete('/establecimientos/delete-seasonal-discount/{id}', 'EstablishmentController@deleteSeasonalDiscount');
 
 	// Descuento por tenedores
 	Route::put('/establecimientos/maximum-number-of-forks/update', 'EstablishmentController@updateMaximumNumberOfForks');
@@ -43,6 +44,9 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function() {
 
 	//Eliminar imágen de la galeria establecimiento
 	Route::delete('/establecimientos/delete-gallery-of-establishment/{id}', 'EstablishmentGalleryController@destroy');
+
+	// Establecimientos
+	Route::get('/establecimientos/get-list', 'EstablishmentController@getList')->name('establishment-get-list');
 	// Establecimeintos
 	Route::resource('establecimientos', 'EstablishmentController');
 
@@ -80,8 +84,13 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function() {
 	Route::get('/productos/get-list', 'ProductController@getList')->name('productos-get-list');
 	Route::resource('productos', 'ProductController');
 
+	Route::get('/', 'HomeController@index')->name('home');
 
 });
 
-Route::get('/admin', 'HomeController@index')->name('home');
+Route::get('/', 'PublicController@index')->name('public');
+Route::get('/ofertas-gastronomicas', 'OfertasGastronomicasController@index')->name('ofertas-gastronomicas');
+Route::get('/producto', 'OfertasGastronomicasController@producto')->name('producto');
+
+
 

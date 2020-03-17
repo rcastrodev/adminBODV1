@@ -27,7 +27,7 @@
 					<label for="day">Días</label>
 					<select name="day" id="" class="select2">
 						<option value="lunes">Lunes</option>
-						<option value="martes">Marter</option>
+						<option value="martes">Martes</option>
 						<option value="miercoles">Miércoles</option>
 						<option value="jueves">Jueves</option>
 						<option value="viernes">Viernes</option>

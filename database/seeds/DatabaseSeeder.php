@@ -172,15 +172,5 @@ class DatabaseSeeder extends Seeder
         $type->name      = 'Cortesia';
         $type->category  = NULL;
         $type->save();
-
-
-        // Crear condiciones
-
-        $condition                 = new Condition();
-        $condition->estatus        = 1;
-        $condition->nombre         = 'producto-duracion-meses';
-        $condition->cantidadTiempo = 3;
-        $condition->tipoTiempo     = NULL;
-        $condition->save();
     }
 }
