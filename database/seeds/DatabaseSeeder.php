@@ -155,5 +155,20 @@ class DatabaseSeeder extends Seeder
         $type->name      = 'Japonesa';
         $type->category  = 'Gastronomia';
         $type->save();
+
+        $type            = new Type();
+        $type->name      = 'Redimible';
+        $type->category  = NULL;
+        $type->save();
+
+        $type            = new Type();
+        $type->name      = 'Evento';
+        $type->category  = NULL;
+        $type->save();
+
+        $type            = new Type();
+        $type->name      = 'Cortesia';
+        $type->category  = NULL;
+        $type->save();
     }
 }

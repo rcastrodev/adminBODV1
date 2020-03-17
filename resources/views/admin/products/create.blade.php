@@ -40,6 +40,8 @@
       <!-- /.card-header -->
       
       <div class="card-body">
+        <form action="{{ route('productos.store') }}" method="POST">
+        @csrf
         <div class="tab-content">
           <div class="tab-pane active" id="tab_1">
             @include('admin.products.form.product-of-basic-data')
@@ -73,7 +75,7 @@
         
         </div>
         <!-- /.tab-content -->
-      
+        </form>
       </div>
       <!-- /.card-body -->
     

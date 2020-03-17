@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Coin;
+use App\Type;
 
 class ProductController extends Controller
 {
@@ -29,7 +31,9 @@ class ProductController extends Controller
   */
   public function create()
   {
-    return view('admin.products.create');
+    $coins = Coin::All();
+    $types = Type::All();
+    return view('admin.products.create', compact('coins', 'types'));
   }
 
   /**
@@ -40,7 +44,7 @@ class ProductController extends Controller
   */
   public function store(Request $request)
   {
-    //
+    return response()->json(['request' => $request->all()]);
   }
 
   /**

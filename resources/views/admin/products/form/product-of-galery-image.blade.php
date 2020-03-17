@@ -4,8 +4,8 @@
 		<div class="form-group">
 			<div class="input-group">
 				<div class="custom-file">
-					<input type="file" class="custom-file-input" name="logo" id="logo">
-					<label class="custom-file-label" for="logo"></label>
+					<input type="file" class="custom-file-input" name="galery" id="galery">
+					<label class="custom-file-label" for="galery"></label>
 				</div>
 				<div class="input-group-append">
 					<span class="input-group-text" id="">Agregar Imagen</span>
