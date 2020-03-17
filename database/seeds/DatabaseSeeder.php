@@ -10,6 +10,7 @@ use App\Zone;
 use App\Gastronomy;
 use App\Type;
 use App\Coin;
+use App\Condition;
 
 class DatabaseSeeder extends Seeder
 {
