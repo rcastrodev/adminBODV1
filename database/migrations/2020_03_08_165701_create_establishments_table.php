@@ -21,10 +21,7 @@ class CreateEstablishmentsTable extends Migration
                                         ->onDelete('cascade')
                                         ->onUpdate('cascade');
 
-            $table->unsignedBigInteger('brand_id');
-            $table->foreign('brand_id')->references('id')->on('brands')
-                                        ->onDelete('cascade')
-                                        ->onUpdate('cascade');
+            $table->unsignedBigInteger('brand_id')->nullable();
 
             $table->boolean('status')->default(false); 
 

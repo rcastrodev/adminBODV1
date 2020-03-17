@@ -83,10 +83,7 @@ class EstablishmentController extends Controller
         Establishment::create($args);
         //obtener el id del establecimiento
         $establishment = Establishment::all()->last();        
-        //crear la relacion en el descuento estacional
-        SeasonalDiscountEstablishment::create([
-            'establishment_id' => $establishment->id
-        ]);
+
         //crear la relacion en el descuento estacional
         EstablishmentForks::create([
             'establishment_id' => $establishment->id
@@ -121,12 +118,12 @@ class EstablishmentController extends Controller
         $brands         = Brand::all();
         $types          = Type::where('category', 'Gastronomia')->get();
         $establishment  = Establishment::find($id);
-        $seasonalDiscount = SeasonalDiscountEstablishment::find($id);
+        $seasonalDiscounts   = SeasonalDiscountEstablishment::where('establishment_id', $id)->get();
         $establishmentForks = EstablishmentForks::find($id);
         $establishmentOpeningHours = EstablishmentOpeningHours::all();
         $establishmentDiscountForNumberOfPeoples = EstablishmentDiscountForNumberOfPeople::all();
 
-        return view('admin.establishments.edit', compact('establishment', 'countries', 'brands', 'types', 'images', 'seasonalDiscount', 'establishmentForks', 'establishmentOpeningHours', 'establishmentDiscountForNumberOfPeoples'));
+        return view('admin.establishments.edit', compact('establishment', 'countries', 'brands', 'types', 'images', 'seasonalDiscounts', 'establishmentForks', 'establishmentOpeningHours', 'establishmentDiscountForNumberOfPeoples'));
     }
 
     /**
@@ -180,7 +177,7 @@ class EstablishmentController extends Controller
         //
     }
 
-    public function updateSeasonalDiscount(Request $request)
+    public function saveSeasonalDiscount(Request $request)
     {
         $request->validate([
             'time_since' => 'required',
@@ -190,10 +187,15 @@ class EstablishmentController extends Controller
             'time_until.required' => 'El campo hora es obligatorio',            
         ]);
         $data = request()->except(['_token', '_method']);
-        SeasonalDiscountEstablishment::where('establishment_id', $request->input('establishment_id'))
-                                    ->update($data);
+        SeasonalDiscountEstablishment::create($data);
 
         return back()->with('mensaje', 'Cargado exitosamente el descuento estacional');
+    }
+
+    public function deleteSeasonalDiscount($id) 
+    {
+        SeasonalDiscountEstablishment::where('id', $id)->delete();
+        return back()->with('mensaje', 'Eliminado el descuento estacional seleccionado');
     }
 
     public function updateMaximumNumberOfForks(Request $request)
@@ -259,5 +261,21 @@ class EstablishmentController extends Controller
     {
         EstablishmentDiscountForNumberOfPeople::where('id', $id)->delete();
         return back()->with('mensaje', 'Descuento eliminado');
+    }
+
+    public function getList()
+    {
+        $establishment = Establishment::select('establishments.id', 'establishments.name', 'establishments.status', 'countries.name AS country', 'cities.name AS city', 'types.name AS gastronomy')
+                ->leftJoin('types', 'establishments.type_id', '=', 'types.id')
+                ->leftJoin('countries', 'establishments.country_id', '=', 'countries.id')
+                ->leftJoin('cities', 'establishments.city_id', '=', 'cities.id');
+
+        return datatables()->eloquent($establishment)
+                ->editColumn('status', function(Establishment $establishment) {
+                    return ($establishment->status) ? 'Activo' : 'Inactivo';
+                })
+                ->addColumn('accion', 'admin.establishments.columnButtonAction')
+                ->rawColumns(['status' => 'status', 'accion' => 'accion'])
+                ->toJson();        
     }
 }

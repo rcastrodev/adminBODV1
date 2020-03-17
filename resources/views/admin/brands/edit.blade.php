@@ -41,6 +41,9 @@
 						<label class="custom-control-label" for="status">Estatus</label>
 					</div>
                 </div>
+                <div class="form-group">
+                	<img src="{{$brand->logo}}" alt="" class="img-fluid admin-img-marca">
+                </div>
 			</div>
 			<!-- /.col -->
 			<div class="col-sm-12 col-md-6">

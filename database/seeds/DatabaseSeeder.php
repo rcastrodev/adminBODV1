@@ -170,5 +170,8 @@ class DatabaseSeeder extends Seeder
         $type->name      = 'Cortesia';
         $type->category  = NULL;
         $type->save();
+
+        factory(App\Brand::class, 50)->create();
+        factory(App\Establishment::class, 200)->create();
     }
 }

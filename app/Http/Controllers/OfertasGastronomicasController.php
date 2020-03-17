@@ -15,4 +15,9 @@ class OfertasGastronomicasController extends Controller
     {
         return view('ofertas-gastronomicas');
     }
+
+    public function producto()
+    {
+    	return view('producto');
+    }
 }
