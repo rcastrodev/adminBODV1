@@ -2,7 +2,7 @@
 <div class="row">
 	<div class="col-sm-12 col-md-6">
 		<div class="form-group">
-			<label for="brands_id">Condición <span style="color: red;">*</span></label>
+			<label for="condition">Condición <span style="color: red;">*</span></label>
 			<div class="row">
 				<div class="col-sm-12 col-md-8">
 					<select id="condition" class="form-control select2" style="width: 100%;">
@@ -44,7 +44,10 @@ function addCondition() {
 	var id = $('#condition').val();
 	var name = $('#condition option:selected').text();
 
-	console.log(id+' '+name);
-	$('#listConditions').append('<tr><td>'+id+'<input type="hidden" name="conditions[]" value="'+id+'"></td><td>'+name+'</td><td>delete</td></tr>');
+	$('#listConditions').append('<tr id="condition_'+id+'"><td>'+id+'<input type="hidden" name="conditions[]" value="'+id+'"></td><td>'+name+'</td><td><button type="button" class="btn btn-sm btn-danger delete" onclick="eliminarCondition('+id+')"><i class="far fa-trash-alt"></i></button></td></tr>');
+}
+
+function eliminarCondition(num) {
+	$('#condition_' + num).remove();
 }
 </script>
