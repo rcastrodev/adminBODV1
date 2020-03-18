@@ -129,10 +129,13 @@ class ZoneController extends Controller
 
     public function getList()
     {
-        return datatables()->eloquent(Zone::query())
+        $zones = Zone::select('zones.id', 'zones.name', 'zones.code', 'cities.name AS city')
+                        ->leftJoin('cities', 'zones.city_id', '=', 'cities.id');
+        
+        return datatables()->eloquent($zones)
                 ->addColumn('accion', 'admin.zones.columnButtonAction')
                 ->editColumn('name', function(Zone $zone) {
-                    return '<a href="/admin/zonas/'. $zone->id.'">'. $zone->name . '</a>';
+                    return '<a href="/admin/zonas/'. $zone->id.'/edit">'. $zone->name . '</a>';
                 })
                 ->rawColumns(['name' => 'name', 'accion' => 'accion'])
                 ->toJson();

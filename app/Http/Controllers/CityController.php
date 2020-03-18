@@ -134,10 +134,13 @@ class CityController extends Controller
 
     public function getList()
     {
-        return datatables()->eloquent(City::query())
+        $cities = City::select('cities.id', 'cities.name', 'cities.code', 'countries.name AS country')
+                        ->leftJoin('countries', 'cities.id', '=', 'countries.id');       
+
+        return datatables()->eloquent($cities)
                 ->addColumn('accion', 'admin.cities.columnButtonAction')
                 ->editColumn('name', function(City $city) {
-                    return '<a href="/admin/ciudades/'. $city->id.'">'. $city->name . '</a>';
+                    return '<a href="/admin/ciudades/'. $city->id.'/edit">'. $city->name . '</a>';
                 })
                 ->rawColumns(['name' => 'name', 'accion' => 'accion'])
                 ->toJson();

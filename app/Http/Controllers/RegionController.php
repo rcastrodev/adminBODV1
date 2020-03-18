@@ -135,7 +135,7 @@ class RegionController extends Controller
         return datatables()->eloquent($regions)
                 ->addColumn('accion', 'admin.regions.columnButtonAction')
                 ->editColumn('name', function(Region $region) {
-                    return '<a href="/admin/estados/'. $region->id.'">'. $region->name . '</a>';
+                    return '<a href="/admin/estados/'. $region->id.'/edit">'. $region->name . '</a>';
                 })
                 ->rawColumns(['name' => 'name', 'accion' => 'accion'])
                 ->toJson();
