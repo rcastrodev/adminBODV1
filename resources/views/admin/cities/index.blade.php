@@ -26,9 +26,10 @@
 			
 		</div>
 		<div class="table-responsive">
-		  	<table class="table" id="table-zone">
+		  	<table class="table" id="table-brands">
 		    	<thead>
 		    		<tr>
+						<th>ID</th>
 				    	<th>Nombre</th>
 				    	<th>CODE</th>
 				    	<th>Pais</th>
@@ -51,13 +52,14 @@
 	<script>
 		$(document).ready(function(){
 
-			$('#table-zone').DataTable({
+			$('#table-brands').DataTable({
 				'serverSide' : true,
 				'ajax' 		 : "{{ route('ciudades-get-list') }}",
 				'columns'    : [
+					{data: 'id'},
 					{data: 'name'},
 					{data: 'code'},
-					{data: 'city', name: 'cities.name'},
+					{data: 'country', name:'countries.name'},
 					{ data: 'accion', name: 'accion', orderable: false, searchable: false }
 				],
 				language: {
