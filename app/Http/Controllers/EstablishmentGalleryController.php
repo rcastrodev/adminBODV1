@@ -11,13 +11,14 @@ class EstablishmentGalleryController extends Controller
     public function store(Request $request)
     {
     	$request->validate([
-    		'img' => 'required|mimes:jpeg,png,jpg|dimensions:min_width=1080,min_height=1080',
+    		'img' => 'required|mimes:jpeg,png,jpg|dimensions:min_width=1080,min_height=1080|max:50000',
             'order' => 'required',
 
     	], [
     		'img.dimensions' => '¡Imagen debe poseer medidas de 1080 x 1080 Px!',
      		'img.mimes'      => 'IMG debe ser JPEG o PNG',
-            'order.required' => 'La imagén debe tener un orden',
+            'img.max'        => '¡Imagen debe pesar menos de 500 KB!' ,
+            'order.required' => 'La imagén debe tener un ordén',
     	]);
 
     	//actualizar los datos

@@ -25,7 +25,6 @@ class CreateBasicEstablishmentDataRequests extends FormRequest
     {
         return [
             'user_id'       => 'required|numeric',
-            'brand_id'      => 'required|numeric',
             'type_id'       => 'required|numeric',
             'country_id'    => 'required|numeric',
             'region_id'     => 'required|numeric',
@@ -37,26 +36,28 @@ class CreateBasicEstablishmentDataRequests extends FormRequest
             'phone'         => 'required|numeric',
             'reservation_email' => 'required|email',
             'rif' => 'required',
-            'logo'          => 'required|mimes:jpeg,png,jpg|dimensions:min_width=1080,min_height=1080',
-            'main_image'    => 'required|mimes:jpeg,png,jpg|dimensions:min_width=1080,min_height=1080',
+            'logo'          => 'required|mimes:jpeg,png,jpg|dimensions:min_width=1080,min_height=1080|max:500000',
+            'main_image'    => 'required|mimes:jpeg,png,jpg|dimensions:min_width=1080,min_height=1080|max:500000',
         ];
     }
 
     public function messages()
     {
         return [
-            'name.required'     => 'Nombre es requerido',
-            'brand_id.required' => 'Franquicia requerida',
-            'address.required'  => 'Dirección requerido',
-            'phone.required'    => 'Teléfono requerido',
+            'name.required'         => 'Nombre es requerido',
+            'address.required'      => 'Dirección requerido',
+            'phone.required'        => 'Teléfono requerido',
             'reservation_email.required' => 'Email para reservación requerido',
-            'logo.required'     => 'Logo es requerido',
-            'logo.dimensions'   => '¡Imagen del logo debe poseer medidas de 1080 x 1080 Px!',
-            'logo.mimes'         => '¡Solo se admiten imágenes con extensión JPG o JPEG!',
+            'logo.required'         => 'Logo es requerido',
+            'logo.dimensions'       => '¡Imagen del logo debe poseer medidas de 1080 x 1080 Px!',
+            'logo.mimes'            => '¡Solo se admiten imágenes con extensión JPG o JPEG!',
+            'logo.max'              => '¡Imagen debe pesar menos de 500 KB!',
             'main_image.required'   => 'La imágen principal es requerida',
             'main_image.dimensions' => '¡Imagen principal debe poseer medidas de 1080 x 1080 Px!',
             'main_image.mimes'      => '¡Solo se admiten imágenes con extensión JPG o JPEG!',
-            'rif.required' => 'El rif es requerido'
+            'main_image.max'        => '¡Imagen debe pesar menos de 500 KB!',
+            'rif.required'          => 'El rif es requerido',
+            'type_id.required'      => 'Tipo de gastronomía requerido',
         ];
     }
 }

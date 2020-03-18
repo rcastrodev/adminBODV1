@@ -26,7 +26,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function() {
 	Route::delete('/establecimientos/delete-seasonal-discount/{id}', 'EstablishmentController@deleteSeasonalDiscount');
 
 	// Descuento por tenedores
-	Route::put('/establecimientos/maximum-number-of-forks/update', 'EstablishmentController@updateMaximumNumberOfForks');
+	Route::post('/establecimientos/maximum-number-of-forks/update', 'EstablishmentController@updateMaximumNumberOfForks');
 
 	// Horario de apertura
 	Route::post('/establecimientos/opening-hours/update', 'EstablishmentController@updateOpeningHours');
@@ -91,6 +91,6 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function() {
 Route::get('/', 'PublicController@index')->name('public');
 Route::get('/ofertas-gastronomicas', 'OfertasGastronomicasController@index')->name('ofertas-gastronomicas');
 Route::get('/producto', 'OfertasGastronomicasController@producto')->name('producto');
-
+Route::get('/establecimientos/{idPais}/{idCiudad}', 'APIController@getEstablishmentCountryCities');
 
 
