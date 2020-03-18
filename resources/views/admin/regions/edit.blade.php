@@ -12,7 +12,7 @@
 @section('content')
 <div class="card card-default">
 	<div class="card-header">
-		<h3 class="card-title">Crear estado <a href="/admin/estados" class="ml-3 btn btn-sm btn-primary">Ver estados</a></h3>
+		<h3 class="card-title">Editar estado <a href="/admin/estados" class="ml-3 btn btn-sm btn-primary">Ver estados</a></h3>
 
 		<div class="card-tools">
 			<button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
@@ -47,7 +47,11 @@
 					<label for="country_id">Pais</label>
 					<select id="country_id" name="country_id" class="form-control select2" style="width: 100%;">
 						@foreach ($countries as $idCountry => $country)
-						<option value="{{$country->id}}">{{$country->name}}</option>
+						<option value="{{$country->id}}" 
+							@if($country->id === $region->country_id)
+								{{ 'selected' }}
+							@endif
+							>{{$country->name}}</option>
 						@endforeach
 					</select>
 				</div>

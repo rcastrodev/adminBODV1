@@ -47,7 +47,11 @@
 					<label for="country_id">Pais</label>
 					<select id="country_id" name="country_id" class="form-control select2" style="width: 100%;">
 						@foreach ($countries as $idCountry => $country)
-						<option value="{{$country->id}}">{{$country->name}}</option>
+						<option value="{{$country->id}}"
+							@if ($country->id === $city->country_id)
+								{{ 'selected' }}
+							@endif
+							>{{$country->name}}</option>
 						@endforeach
 					</select>
 				</div>
@@ -59,7 +63,11 @@
 					<label for="region_id">Estado</label>
 					<select id="region_id" name="region_id" class="form-control select2" style="width: 100%;">
 						@foreach ($regions as $idRegion => $region)
-						<option value="{{$region->id}}">{{$region->name}}</option>
+						<option value="{{$region->id}}"							
+							@if ($region->id === $city->region_id)
+								{{ 'selected' }}
+							@endif
+							>{{$region->name}}</option>
 						@endforeach
 					</select>
 				</div>

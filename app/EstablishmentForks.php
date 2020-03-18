@@ -11,8 +11,8 @@ class EstablishmentForks extends Model
 
     public static function getEstablishmentForkOCreateObject($id)
     {
-    	if (self::find($id)) {
-    		return self::find($id);
+    	if ( self::where('establishment_id', $id)->first() ) {
+    		return self::where('establishment_id', $id)->first();
     	} else {
     		return new EstablishmentForks;
     	}

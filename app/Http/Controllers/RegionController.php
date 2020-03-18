@@ -22,7 +22,7 @@ class RegionController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    {   
         return view('admin.regions.index');
     }
 
@@ -129,10 +129,13 @@ class RegionController extends Controller
 
     public function getList()
     {
-        return datatables()->eloquent(Region::query())
+        $regions = Region::select('regions.id', 'regions.name', 'regions.code', 'countries.name AS city')
+                ->leftJoin('countries', 'regions.country_id', '=', 'countries.id');
+        
+        return datatables()->eloquent($regions)
                 ->addColumn('accion', 'admin.regions.columnButtonAction')
                 ->editColumn('name', function(Region $region) {
-                    return '<a href="/admin/estados/'. $region->id.'">'. $region->name . '</a>';
+                    return '<a href="/admin/estados/'. $region->id.'/edit">'. $region->name . '</a>';
                 })
                 ->rawColumns(['name' => 'name', 'accion' => 'accion'])
                 ->toJson();

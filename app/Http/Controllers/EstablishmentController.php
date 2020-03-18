@@ -201,9 +201,13 @@ class EstablishmentController extends Controller
     public function updateMaximumNumberOfForks(Request $request)
     {
         $data = request()->except(['_token', '_method']);
-        EstablishmentForks::where('establishment_id', $request->input('establishment_id'))
-                        ->update($data);
-
+        $establishment = $request->input('establishment_id');
+        // si existe el registro los actualiza si no lo crea
+        if( EstablishmentForks::where('establishment_id', $establishment)->first() ){
+            EstablishmentForks::where('establishment_id', $establishment)->update($data);
+        } else {
+            EstablishmentForks::create($data);
+        }
         return back()->with('mensaje', 'Cantidad de tenedores agregado con exito');
     }
 

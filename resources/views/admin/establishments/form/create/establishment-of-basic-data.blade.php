@@ -18,31 +18,33 @@
 				<div class="form-group">
 					<label for="brands_id">Franquicia</label>
 					<select name="brand_id" class="form-control select2" style="width: 100%;">
+						<option value="">Selecciona una Franquicia</option>
 						@foreach ($brands as $brand)
 						<option value="{{$brand->id}}">{{$brand->name}}</option>
 						@endforeach
 					</select>
 				</div>
 				<div class="form-group">
-					<label for="country_id">Pais</label>
+					<label for="country_id">Pais (*)</label>
 					<select name="country_id" class="form-control select2-p" style="width: 100%;">
+						<option value="">Selecciona un país</option>
 						@foreach ($countries as $country)
 						<option value="{{$country->id}}">{{$country->name}}</option>
 						@endforeach
 					</select>
 				</div>		
 				<div class="form-group">
-					<label for="city_id">Ciudad</label>
+					<label for="city_id">Ciudad (*)</label>
 					<select name="city_id" class="form-control select2 city" style="width: 100%;">
 						<option value="">Seleccione una ciudad ...</option>
 					</select>
 				</div>
 				<div class="form-group">
-					<label for="name">Nombre del establecimiento</label>
+					<label for="name">Nombre del establecimiento (*)</label>
 					<input type="text" name="name" class="form-control" value="{{ old('name') }}" id="" placeholder="">
 				</div>
 				<div class="form-group">
-					<label for="reservation_email">Email de reservación</label>
+					<label for="reservation_email">Email de reservación (*)</label>
 					<input type="text" name="reservation_email" class="form-control" value="{{ old('reservation_email') }}" id="" placeholder="">
 				</div>
 				<div class="form-group">
@@ -51,7 +53,7 @@
 				</div>
 
 				<div class="form-group">
-					<label for="main_image">Imágen principal</label>
+					<label for="main_image">Imágen principal (*)</label>
 					<div class="input-group">
 						<div class="custom-file">
 							<input type="file" class="custom-file-input" name="main_image" id="main_image">
@@ -79,31 +81,32 @@
 			</div>
 			<div class="col-sm-12 col-md-6">
 				<div class="form-group">
-					<label for="type_id">Tipo</label>
+					<label for="type_id">Tipo (*)</label>
 					<select name="type_id" class="form-control select2" style="width: 100%;">
+						<option value="">Selecciona una Gastronomía</option>
 						@foreach ($types as $type)
 						<option value="{{$type->id}}">{{$type->name}}</option>
 						@endforeach
 					</select>
 				</div>
 				<div class="form-group">
-					<label for="region_id">Departamento o Estado</label>
+					<label for="region_id">Departamento o Estado (*)</label>
 					<select name="region_id" class="form-control select2 region" style="width: 100%;">
 						<option value="">Seleccione un estado ...</option>
 					</select>
 				</div>
 				<div class="form-group">
-					<label for="zone_id">Zona</label>
+					<label for="zone_id">Zona (*)</label>
 					<select name="zone_id" class="form-control select2 zone" style="width: 100%;">
 						<option value="">Seleccione una zona ...</option>
 					</select>
 				</div>
 				<div class="form-group">
-					<label for="owner_name">Nombre del propietario</label>
+					<label for="owner_name">Nombre del propietario (*)</label>
 					<input type="text" name="owner_name" value="{{ old('owner_name') }}" class="form-control" id="" placeholder="">
 				</div>
 				<div class="form-group">
-					<label for="phone">Teléfono</label>
+					<label for="phone">Teléfono (*)</label>
 					<input type="text" name="phone" value="{{ old('phone') }}" class="form-control" id="" placeholder="">
 				</div>
 
@@ -130,7 +133,7 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="linear_discount">Rif</label>
+					<label for="linear_discount">Rif (*)</label>
 					<input type="text" name="rif" class="form-control" id="" placeholder="" value="{{ old('rif') }}">
 				</div>
 			</div>
@@ -142,7 +145,7 @@
 					</textarea>
 				</div>
 				<div class="form-group">
-					<label for="address">Dirección</label>
+					<label for="address">Dirección (*)</label>
 					<textarea name="address" id="" cols="10" rows="10">
 						{{ old('address') }}
 					</textarea>
