@@ -55,7 +55,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function() {
 	Route::get('/paises/get-list', 'CountryController@getList')->name('paises-get-list');
 	Route::resource('paises', 'CountryController');
 
-	// Configuracion / Estados
+	// Configuracion 	/ Estados
 	Route::get('/estados/get-list', 'RegionController@getList')->name('estados-get-list');
 	Route::get('/estados/by-country', 'RegionController@byCountry')->name('estados-by-pais');
 	Route::resource('estados', 'RegionController');
@@ -83,6 +83,10 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function() {
 	// Configuracion / Monedas
 	Route::get('/productos/get-list', 'ProductController@getList')->name('productos-get-list');
 	Route::resource('productos', 'ProductController');
+
+	// Reservas
+	// Route::get('/reservas/get-list', 'Reservations@getList')->name('reservas-get-list');
+	// Route::resource('reservas', 'ReservationsController');
 
 	Route::get('/', 'HomeController@index')->name('home');
 

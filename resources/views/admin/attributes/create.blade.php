@@ -12,7 +12,7 @@
 @section('content')
 <div class="card card-default">
 	<div class="card-header">
-		<h3 class="card-title">Crear atributo <a href="/admin/atributos" class="ml-3 btn btn-sm btn-primary">Ver atributo</a></h3>
+		<h3 class="card-title">Crear atributos <a href="/admin/atributos" class="ml-3 btn btn-sm btn-primary">Ver atributo</a></h3>
 
 		<div class="card-tools">
 			<button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
@@ -25,31 +25,25 @@
 		@include('partials.messages.errors')
 		@include('partials.messages.success')
 		<div class="row">
+			<!-- /.col -->
+
 			<div class="col-sm-12 col-md-4">
 				<div class="form-group">
-					<label for="key">Clave</label>
-					<input type="text" class="form-control" id="key" name="key" value="{{ old('key') }}">
+					<label for="name">Nombre</label>
+					<input type="text" class="form-control" id="name" name="name"  value="{{ old('name') }}">
 				</div>
 			</div>
 			<!-- /.col -->
 
 			<div class="col-sm-12 col-md-4">
 				<div class="form-group">
-					<label for="value">Valor</label>
-					<input type="text" class="form-control" id="value" name="value"  value="{{ old('value') }}">
-				</div>
-			</div>
-			<!-- /.col -->
-
-			<div class="col-sm-12 col-md-4">
-				<div class="form-group">
-					<label for="use">Use</label>
-					<input type="text" class="form-control" id="use" name="use"  value="{{ old('use') }}">
+					<label for="category">Categoría</label>
+					<input type="text" class="form-control" id="category" name="category"  value="{{ old('category') }}">
 				</div>
 			</div>
 			<!-- /.col -->
 			
-			<div class="col-sm-12 mt-4">
+			<div class="col-sm-12 col-md-4 mt-1 d-flex justify-content-center align-items-center">
 				<button type="submit" class="btn btn-primary">Guardar</button>
 			</div>
 			<!-- /.col -->

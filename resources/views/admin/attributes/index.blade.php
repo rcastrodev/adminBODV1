@@ -30,9 +30,8 @@
 		    	<thead>
 		    		<tr>
 						<th>ID</th>
-				    	<th>Clave</th>
-				    	<th>Valor</th>
-				    	<th>Uso</th>
+				    	<th>Nombre</th>
+				    	<th>Categoría</th>
 				    	<th>Acción</th>
 		    		</tr>
 		    	</thead>
@@ -57,9 +56,8 @@
 				'ajax' 		 : "{{ route('atributos-get-list') }}",
 				'columns'    : [
 					{data: 'id'},
-					{data: 'key'},
-					{data: 'value'},
-					{data: 'use'},
+					{data: 'name'},
+					{data: 'category'},
 					{ data: 'accion', name: 'accion', orderable: false, searchable: false }
 				],
 				language: {

@@ -44,10 +44,10 @@ class AttributeController extends Controller
     public function store(Request $request)
     {
         $args = [
-            'key'   => $request->input('key'),
-            'value' => $request->input('value'),
-            'use'   => $request->input('use')
+            'name' => $request->input('name'),
+            'category'   => $request->input('category'),
         ];
+
 
         Attribute::create($args);
         $ultimoRegistro = Attribute::all()->last();
@@ -90,9 +90,8 @@ class AttributeController extends Controller
     public function update(Request $request, $id)
     {
         $args = [
-            'key'   => $request->input('key'),
-            'value' => $request->input('value'),
-            'use'   => $request->input('use'),
+            'name' => $request->input('name'),
+            'category'   => $request->input('category'),
         ];
 
         Attribute::where('id', $id)->update($args);
@@ -129,7 +128,7 @@ class AttributeController extends Controller
         return datatables()->eloquent(Attribute::query())
                 ->addColumn('accion', 'admin.attributes.columnButtonAction')
                 ->editColumn('name', function(Attribute $attribute) {
-                    return '<a href="/admin/atributos/'. $attribute->id.'">'. $attribute->key . '</a>';
+                    return '<a href="/admin/atributos/'. $attribute->id.'">'. $attribute->name . '</a>';
                 })
                 ->rawColumns(['name' => 'name', 'accion' => 'accion'])
                 ->toJson();

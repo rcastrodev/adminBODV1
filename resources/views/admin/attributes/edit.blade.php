@@ -28,28 +28,20 @@
 		<div class="row">
 			<div class="col-sm-12 col-md-4" data-select2-id="29">
 				<div class="form-group">
-					<label for="key">Clave</label>
-					<input type="text" class="form-control" id="key" name="key" value="{{ $attribute->key }}">
+					<label for="name">Nombre</label>
+					<input type="text" class="form-control" id="name" name="name"  value="{{ $attribute->name }}">
 				</div>
 			</div>
 			<!-- /.col -->
 
 			<div class="col-sm-12 col-md-4" data-select2-id="29">
 				<div class="form-group">
-					<label for="value">Valor</label>
-					<input type="text" class="form-control" id="value" name="value"  value="{{ $attribute->value }}">
+					<label for="category">Categoría</label>
+					<input type="text" class="form-control" id="category" name="category"  value="{{ $attribute->category }}">
 				</div>
 			</div>
 			<!-- /.col -->
-
-			<div class="col-sm-12 col-md-4" data-select2-id="29">
-				<div class="form-group">
-					<label for="use">Uso</label>
-					<input type="text" class="form-control" id="use" name="use"  value="{{ $attribute->use }}">
-				</div>
-			</div>
-			<!-- /.col -->
-			<div class="col-sm-12 mt-4">
+			<div class="col-sm-12 col-md-4 mt-1 d-flex justify-content-center align-items-center">
 				<button type="submit" class="btn btn-primary">Actualizar</button>
 			</div>
 			<!-- /.col -->

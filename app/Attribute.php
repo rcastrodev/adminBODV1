@@ -6,9 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Attribute extends Model
 {
-    protected $fillable = [
-    	'key',
-    	'value',
-    	'use'
-    ];
+	protected $table = 'types';
+
+    protected $fillable = ['name','category'];
 }
