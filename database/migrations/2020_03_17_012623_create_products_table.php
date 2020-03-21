@@ -17,6 +17,7 @@ class CreateProductsTable extends Migration
             $table->bigIncrements('id');
             $table->integer('producto_padre')->nullable();
             $table->integer('tipo_producto_id')->nullable();
+            $table->integer('category_id')->nullable();
             $table->integer('country_id')->nullable();
             $table->integer('region_id')->nullable();
             $table->integer('city_id')->nullable();
@@ -25,6 +26,7 @@ class CreateProductsTable extends Migration
             $table->boolean('estatus')->nullable();
             $table->longText('description')->nullable();
             $table->string('nombre')->nullable();
+            $table->string('direccion')->nullable();
             $table->string('logo')->nullable();
             $table->string('imagen_principal')->nullable();
             $table->boolean('publicado_web')->nullable();
@@ -37,6 +39,7 @@ class CreateProductsTable extends Migration
             $table->boolean('afiliado_gratis')->nullable();
             $table->boolean('afiliado_na')->nullable();
             $table->timestamp('fecha_producto')->nullable();
+            $table->string('hora_producto')->nullable();
             $table->timestamps();
         });
     }

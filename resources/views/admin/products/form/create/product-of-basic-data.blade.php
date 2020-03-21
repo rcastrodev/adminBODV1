@@ -1,5 +1,4 @@
 <!-- /.row -->
-@include('partials.messages.errors')
 <div class="row">
 	<div class="col-sm-12 col-md-6">
 		<div class="form-group">
@@ -7,13 +6,26 @@
 			<input type="text" name="nombre" class="form-control" value="{{ old('nombre') }}" id="nombre" placeholder="">
 		</div>
 	</div>
-	<div class="col-sm-12 col-md-6">
+	<div class="col-sm-12 col-md-3">
 		<div class="form-group">
 			<label for="tipo_producto_id">Tipo de Producto <span style="color: red;">*</span></label>
 			<select name="tipo_producto_id" class="form-control select2" style="width: 100%;" id="tipo_producto_id" onchange="tipoProducto()">
 				<option value="">Seleccione un tipo ...</option>
 				@foreach($types as $type)
 					@if($type->category == NULL)
+					<option value="{{ $type->id }}">{{ $type->name }}</option>
+					@endif
+				@endforeach
+			</select>
+		</div>
+	</div>
+	<div class="col-sm-12 col-md-3">
+		<div class="form-group">
+			<label for="category_id">Categoria de Producto <span style="color: red;">*</span></label>
+			<select name="category_id" class="form-control select2" style="width: 100%;" id="category_id">
+				<option value="">Seleccione una Categoria ...</option>
+				@foreach($types as $type)
+					@if($type->category != NULL)
 					<option value="{{ $type->id }}">{{ $type->name }}</option>
 					@endif
 				@endforeach
@@ -23,30 +35,6 @@
 </div>
 
 <div class="row" id="tipoEventoContent">
-	<div class="col-sm-12 col-md-6">
-		<div class="form-group">
-			<label for="nombre">Establecimiento <span style="color: red;">*</span></label>
-			<select name="establecimiento" class="form-control select2" style="width: 100%;" id="establecimiento">
-				<option value="">Seleccione un establecimiento ...</option>
-				@foreach($establishments as $establishment)
-					<option value="{{ $establishment->id }}">{{ $establishment->name }}</option>
-				@endforeach
-			</select>
-		</div>
-	</div>
-	<div class="col-sm-12 col-md-6">
-		<div class="form-group">
-			<label for="tipo_producto_id">Tipo de Producto <span style="color: red;">*</span></label>
-			<select name="tipo_producto_id" class="form-control select2" style="width: 100%;" id="tipo_producto_id" onchange="tipoProducto()">
-				<option value="">Seleccione un tipo ...</option>
-				@foreach($types as $type)
-					@if($type->category == NULL)
-					<option value="{{ $type->id }}">{{ $type->name }}</option>
-					@endif
-				@endforeach
-			</select>
-		</div>
-	</div>
 </div>
 
 <div class="row">
@@ -157,10 +145,6 @@
 		</div>
 	</div>
 </div>
-
-<div class="col-12 mt-5" style="text-align: right;">
-	<button class="btn btn-sm btn-primary" type="">Guardar Producto</button>
-</div>
 <!-- /.row -->
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -170,7 +154,7 @@ function filePreviewImagenPrincipal(input) {
     var reader = new FileReader();
     reader.onload = function (e) {
       $('#show_imagen_principal + img').remove();
-      $('#show_imagen_principal').after('<img src="'+e.target.result+'" width="450" height="300"/>');
+      $('#show_imagen_principal').after('<img src="'+e.target.result+'" width="100%"/>');
     }
     reader.readAsDataURL(input.files[0]);
   }
@@ -181,7 +165,7 @@ function filePreviewLogo(input) {
     var reader = new FileReader();
     reader.onload = function (e) {
       $('#show_logo + img').remove();
-      $('#show_logo').after('<img src="'+e.target.result+'" width="450" height="300"/>');
+      $('#show_logo').after('<img src="'+e.target.result+'" width="100%"/>');
     }
     reader.readAsDataURL(input.files[0]);
   }
@@ -198,9 +182,27 @@ $("#logo").change(function () {
 function tipoProducto() {
 	var tipoProducto = $('#tipo_producto_id option:selected').text();
 	if (tipoProducto == 'Evento') {
-		$('#linkTab_3').hide();
-		$('#tab_3').hide();
-		$('#tipo_producto_id').prop('disabled', true);
+		$('#linkTab_3').prop('style', 'display:none');
+		$('#tab_3').prop('style', 'display:none');
+
+		$('#linkTab_4').prop('style', 'display:none');
+		$('#tab_4').prop('style', 'display:none');
+
+		$('#linkTab_6').prop('style', 'display:none');
+		$('#tab_6').prop('style', 'display:none');
+		
+		$('#tipoEventoContent').html('<div class="col-sm-12 col-md-6"><div class="form-group"><label for="establecimiento">Establecimiento <span style="color: red;">*</span></label><select name="establecimiento[]" class="form-control select2" style="width: 100%;" id="establecimiento"><option value="">Seleccione un establecimiento ...</option>@foreach($establishments as $establishment)<option value="{{ $establishment->id }}">{{ $establishment->name }}</option>@endforeach</select></div></div><div class="col-sm-12 col-md-6"><div class="form-group"><label for="direccion">Dirección <span style="color: red;">*</span></label><input type="text" name="direccion" value="" class="form-control" id="direccion"></div></div><div class="col-sm-12 col-md-6"><div class="form-group"><label for="fecha_producto">Fecha Evento <span style="color: red;">*</span></label><input type="date" name="fecha_producto" class="form-control" id="fecha_producto"></div></div><div class="col-sm-12 col-md-6"><div class="form-group"><label for="hora_producto">Hora Evento <span style="color: red;">*</span></label><input type="time" name="hora_producto" class="form-control" id="hora_producto"></div></div>')
+	} else {
+		$('#linkTab_3').prop('style', '');
+		$('#tab_3').prop('style', '');
+
+		$('#linkTab_4').prop('style', '');
+		$('#tab_4').prop('style', '');
+
+		$('#linkTab_6').prop('style', '');
+		$('#tab_6').prop('style', '');
+		
+		$('#tipoEventoContent').html('');
 	}
 }
 </script>

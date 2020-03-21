@@ -41,36 +41,38 @@
       
       <div class="card-body">
         @include('partials.messages.errors')
-        <form action="{{ route('productos.store') }}" method="POST" enctype="multipart/form-data">
+        @include('partials.messages.success')
+        <form action="/admin/productos/{{$producto->id}}" method="POST" enctype="multipart/form-data">
         @csrf
+        @method('PUT')
         <div class="tab-content">
           <div class="tab-pane active" id="tab_1">
-            @include('admin.products.form.create.product-of-basic-data')
+            @include('admin.products.form.edit.product-of-basic-data')
           </div>
           <!-- /.tab-pane -->
           
           <div class="tab-pane" id="tab_2">
-            @include('admin.products.form.create.product-of-galery-image')
+            @include('admin.products.form.edit.product-of-galery-image')
           </div>
           <!-- /.tab-pane -->
           
           <div class="tab-pane" id="tab_3">
-            @include('admin.products.form.create.product-of-establishment')
+            @include('admin.products.form.edit.product-of-establishment')
           </div>
           <!-- /.tab-pane -->
 
           <div class="tab-pane" id="tab_4">
-            @include('admin.products.form.create.product-of-conditions')
+            @include('admin.products.form.edit.product-of-conditions')
           </div>
           <!-- /.tab-pane -->
 
           <div class="tab-pane" id="tab_5">
-            @include('admin.products.form.create.product-of-inventory')
+            @include('admin.products.form.edit.product-of-inventory')
           </div>
           <!-- /.tab-pane -->
 
           <div class="tab-pane" id="tab_6">
-            @include('admin.products.form.create.product-of-product')
+            @include('admin.products.form.edit.product-of-product')
           </div>
           <!-- /.tab-pane -->
         

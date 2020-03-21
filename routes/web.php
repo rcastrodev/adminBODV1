@@ -80,7 +80,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function() {
 
 
 	// Seccion de productos
-	// Configuracion / Monedas
+	// Configuracion / productos
 	Route::get('/productos/get-list', 'ProductController@getList')->name('productos-get-list');
 	Route::resource('productos', 'ProductController');
 

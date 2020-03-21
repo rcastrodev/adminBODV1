@@ -26,12 +26,13 @@
 			
 		</div>
 		<div class="table-responsive">
-		  <table class="table" id="table-brands">
+		  <table class="table" id="table-products">
 		   	<thead>
 		   		<tr>
 					<th>ID</th>
 				   	<th>Nombre</th>
 				   	<th>Categoria</th>
+				   	<th>Tipo</th>
 				   	<th>Acción</th>
 		   		</tr>
 		   	</thead>
@@ -47,4 +48,23 @@
 @stop
 
 @section('js')
+	<script>
+		$(document).ready(function(){
+
+			$('#table-products').DataTable({
+				'serverSide' : true,
+				'ajax' 		 : "{{ route('productos-get-list') }}",
+				'columns'    : [
+					{data: 'id'},
+					{data: 'name'},
+					{data: 'category_id'},
+					{data: 'tipo_producto_id'},
+					{ data: 'accion', name: 'accion', orderable: false, searchable: false }
+				],
+				language: {
+            			url: "//cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json",
+        			}, 
+			})
+		})
+	</script>
 @stop

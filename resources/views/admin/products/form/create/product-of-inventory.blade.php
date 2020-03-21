@@ -6,7 +6,7 @@
 				<option value="">Seleccione una condición ...</option>
 				<option value="1">Manual</option>
 				<option value="2">Automatico</option>
-			</select>	
+			</select>
 		</div>
 	</div>
 </div>
@@ -40,10 +40,37 @@ function tipo() {
 function addInventory() {
 	cantInventory = $('#cantInventory').val();
 
-	for (var i = 0; i < cantInventory; i++) {
-		$('#listInventory').append('<tr><td>123456</td><td>delete</td></tr>');
+	var now;
+	for (var i = 1; i <= cantInventory; i++) {
+		var date = new Date();
+		var timestamp = date.getTime();
+		$('#listInventory').append('<tr id="inventory_'+i+'"><td>PROD-'+timestamp+'-'+zfill(i, 4)+'<input type="hidden" name="inventario[]" value="PROD-'+timestamp+'-'+zfill(i, 4)+'"></td><td><button type="button" class="btn btn-sm btn-danger delete" onclick="eliminarInventory('+i+')"><i class="far fa-trash-alt"></i></button></td></tr>');
 	}
 	$('#buttonAddInventory').prop('disabled', true);
 	
+}
+
+function zfill(number, width) {
+    var numberOutput = Math.abs(number); /* Valor absoluto del número */
+    var length = number.toString().length; /* Largo del número */ 
+    var zero = "0"; /* String de cero */  
+    
+    if (width <= length) {
+        if (number < 0) {
+             return ("-" + numberOutput.toString()); 
+        } else {
+             return numberOutput.toString(); 
+        }
+    } else {
+        if (number < 0) {
+            return ("-" + (zero.repeat(width - length)) + numberOutput.toString()); 
+        } else {
+            return ((zero.repeat(width - length)) + numberOutput.toString()); 
+        }
+    }
+}
+
+function eliminarInventory(numi) {
+	$('#inventory_' + numi).remove();
 }
 </script>
