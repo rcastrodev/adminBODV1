@@ -20,4 +20,9 @@ class OfertasGastronomicasController extends Controller
     {
     	return view('producto');
     }
+
+    public function maps()
+    {
+        return view('admin.maps');
+    }
 }

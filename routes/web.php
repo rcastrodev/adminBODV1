@@ -47,8 +47,14 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function() {
 
 	// Establecimientos
 	Route::get('/establecimientos/get-list', 'EstablishmentController@getList')->name('establishment-get-list');
+
+	// Establecimientos
+	Route::post('/establishment/coordenadas', 'EstablishmentController@coordenadas');
+	
 	// Establecimeintos
 	Route::resource('establecimientos', 'EstablishmentController');
+
+	
 
 
 	// Configuracion / Paises
@@ -85,8 +91,8 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function() {
 	Route::resource('productos', 'ProductController');
 
 	// Reservas
-	// Route::get('/reservas/get-list', 'Reservations@getList')->name('reservas-get-list');
-	// Route::resource('reservas', 'ReservationsController');
+	Route::get('/reservas/get-list', 'Reservations@getList')->name('reservas-get-list');
+	Route::resource('reservas', 'ReservationsController');
 
 	Route::get('/', 'HomeController@index')->name('home');
 
@@ -95,6 +101,5 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function() {
 Route::get('/', 'PublicController@index')->name('public');
 Route::get('/ofertas-gastronomicas', 'OfertasGastronomicasController@index')->name('ofertas-gastronomicas');
 Route::get('/producto', 'OfertasGastronomicasController@producto')->name('producto');
-Route::get('/establecimientos/{idPais}/{idCiudad}', 'APIController@getEstablishmentCountryCities');
-
+Route::get('/maps', 'OfertasGastronomicasController@maps');
 

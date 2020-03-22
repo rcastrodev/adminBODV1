@@ -147,8 +147,6 @@ class EstablishmentController extends Controller
             'owner_name'=> $request->input('owner_name'),
             'rif'       => $request->input('rif'),
             'address'   => $request->input('address'),
-            'latitude'  => $request->input('latitude'),
-            'length'    => $request->input('length'),
             'phone'     => $request->input('phone'),
             'logo'      => Establishment::deleteIfYouHaveImage($request, $id, 'logo', 'logo'),
             'main_image'=> Establishment::deleteIfYouHaveImage($request, $id, 'main_image', 'main_image'),
@@ -162,7 +160,8 @@ class EstablishmentController extends Controller
         ];
 
         Establishment::where('id', $id)->update($args);     
-        return back()->withInput()->with('mensaje', 'Actualizado');
+        return back()->withInput()
+                    ->with('mensaje', 'Actualizado');
 
     }
 
@@ -281,5 +280,17 @@ class EstablishmentController extends Controller
                 ->addColumn('accion', 'admin.establishments.columnButtonAction')
                 ->rawColumns(['status' => 'status', 'accion' => 'accion'])
                 ->toJson();        
+    }
+
+    public function coordenadas(Request $request)
+    {
+        $coordenadas = explode(",", $request->input('coordenadas'));
+        Establishment::where('id', $request->input('establishment_id'))
+                    ->update([
+                        'latitude' => $coordenadas[0],
+                        'length'   => $coordenadas[1]
+                    ]);
+
+        return back()->with('mensaje', 'Coordenadas de establecimiento agregadas');
     }
 }

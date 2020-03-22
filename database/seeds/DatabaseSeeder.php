@@ -26,15 +26,15 @@ class DatabaseSeeder extends Seeder
         // Crear Roles
 
         $role = new Role();
-        $role->role = 'Súper Administrador';
+        $role->name = 'Súper Administrador';
         $role->save();
 
         $role = new Role();
-        $role->role = 'Administrador de Contenido';
+        $role->name = 'Administrador de Contenido';
         $role->save();
 
         $role = new Role();
-        $role->role = 'Aliado';
+        $role->name = 'Aliado';
         $role->save();
 
         // Crear usuario admin

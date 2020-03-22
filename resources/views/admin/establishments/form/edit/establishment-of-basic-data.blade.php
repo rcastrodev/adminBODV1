@@ -49,10 +49,6 @@
 					<input type="text" name="reservation_email" class="form-control" value="{{ $establishment->reservation_email }}" id="" placeholder="">
 				</div>
 				<div class="form-group">
-					<label for="length">Longitud</label>
-					<input type="text" name="length" class="form-control" value="{{ $establishment->length }}" id="" placeholder="">
-				</div>
-				<div class="form-group">
 					<label for="main_image">Imágen principal</label>
 					<div class="input-group">
 						<div class="custom-file">
@@ -117,11 +113,6 @@
 				<div class="form-group">
 					<label for="phone">Teléfono</label>
 					<input type="text" name="phone" value="{{ $establishment->phone }}" class="form-control" id="" placeholder="">
-				</div>
-
-				<div class="form-group">
-					<label for="latitude">Latitud</label>
-					<input type="text" name="latitude" value="{{ $establishment->latitude }}" class="form-control" id="" placeholder="">
 				</div>
 				<div class="form-group">
 					<label for="logo">Logo del establecimiento</label>

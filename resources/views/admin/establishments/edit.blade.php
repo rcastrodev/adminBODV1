@@ -1,15 +1,17 @@
 @extends('adminlte::page')
 @section('css')
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+   integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+   crossorigin=""/>
 <style>
-	.select2-container{
-		width: 100% !important;
-	}
+	.select2-container{width: 100% !important;}
+	#tab_7{ height: 600px;}
+	#map { height: 500px; }
 </style>
 @stop
 @section('title', 'Establecimientos')
 @section('content_header')
-<h1>Establecimiento <strong>{{ $establishment->name }}</strong></h1>
+<h1>Establecimiento <strong>{{ $establishment->name }}</strong> <a href="/admin/establecimientos" class="ml-3 btn btn-sm btn-primary">Ver Establecimientos</a></h1>
 @stop
 @section('content')
 <div class="pb-5">
@@ -20,7 +22,6 @@
 			<!-- Custom Tabs -->
 			<div class="card">
 				<div class="card-header d-flex p-0">
-					<h3 class="card-title p-3"><a href="/admin/establecimientos" class="ml-3 btn btn-sm btn-primary">Ver Establecimientos</a></h3>
 					<ul class="nav nav-pills ml-auto p-2">
 						<li class="nav-item">
 							<a class="nav-link active" href="#tab_1" data-toggle="tab">Datos Basicos</a>
@@ -39,6 +40,9 @@
 						</li>
 						<li class="nav-item">
 							<a class="nav-link" href="#tab_6" data-toggle="tab">Desc por comensal</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#tab_7" data-toggle="tab">Coordenadas</a>
 						</li>
 					</ul>
 				</div>
@@ -69,6 +73,11 @@
 						<!-- /.tab-pane -->
 						<div class="tab-pane" id="tab_6">
 							@include('admin.establishments.form.edit.discounts-for-number-of-people')
+						</div>
+						<!-- /.tab-pane -->
+						<!--tab-pane -->
+						<div class="tab-pane" id="tab_7">
+							@include('admin.establishments.form.edit.maps')
 						</div>
 						<!-- /.tab-pane -->
 
@@ -185,5 +194,6 @@
 	CKEDITOR.replace('description')
 	CKEDITOR.replace('address')
 </script>
-
+<script src='{{ asset('js/establishments/maps.js') }}'></script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?callback=initMap"></script>
 @stop
