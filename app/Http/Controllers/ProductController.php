@@ -333,7 +333,7 @@ class ProductController extends Controller
       return datatables()->eloquent($products)
               ->addColumn('accion', 'admin.products.columnButtonAction')
               ->editColumn('name', function(Product $product) {
-                  return '<a href="/admin/productos/'. $product->id.'">'. $product->nombre . '</a>';
+                  return '<a href="/admin/productos/'. $product->id.'"/edit>'. $product->nombre . '</a>';
               })
               ->rawColumns(['name' => 'name', 'accion' => 'accion'])
               ->toJson();
