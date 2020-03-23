@@ -101,5 +101,5 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function() {
 Route::get('/', 'PublicController@index')->name('public');
 Route::get('/ofertas-gastronomicas', 'OfertasGastronomicasController@index')->name('ofertas-gastronomicas');
 Route::get('/producto', 'OfertasGastronomicasController@producto')->name('producto');
-Route::get('/maps', 'OfertasGastronomicasController@maps');
+Route::get('/establecimientos/{idPais}/{idCiudad}/', 'APIController@getEstablishments');
 

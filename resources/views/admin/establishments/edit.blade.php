@@ -27,7 +27,7 @@
 							<a class="nav-link active" href="#tab_1" data-toggle="tab">Datos Basicos</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="#tab_2" data-toggle="tab">Galería</a>
+							<a class="nav-link" href="#tab_2" data-toggle="tab">Dirección</a>
 						</li>
 						<li class="nav-item">
 							<a class="nav-link" href="#tab_3" data-toggle="tab">Descuento estacional</a>
@@ -42,7 +42,7 @@
 							<a class="nav-link" href="#tab_6" data-toggle="tab">Desc por comensal</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="#tab_7" data-toggle="tab">Coordenadas</a>
+							<a class="nav-link" href="#tab_7" data-toggle="tab">Galería</a>
 						</li>
 					</ul>
 				</div>
@@ -54,8 +54,8 @@
 							@include('admin.establishments.form.edit.establishment-of-basic-data')
 						</div>
 						<!-- /.tab-pane -->
-						<div class="tab-pane" id="tab_2">
-							@include('admin.establishments.form.edit.image-gallery')
+						<div class="tab-pane" id="tab_2">			
+							@include('admin.establishments.form.edit.maps')
 						</div>
 						<!-- /.tab-pane -->
 
@@ -77,7 +77,7 @@
 						<!-- /.tab-pane -->
 						<!--tab-pane -->
 						<div class="tab-pane" id="tab_7">
-							@include('admin.establishments.form.edit.maps')
+							@include('admin.establishments.form.edit.image-gallery')
 						</div>
 						<!-- /.tab-pane -->
 

@@ -39,7 +39,7 @@ class EstablishmentController extends Controller
     public function create()
     {
         $countries  = Country::all();
-        $brands     = Brand::all();
+        $brands     = Brand::where('status', 1)->get();
         $types      = Type::where('category', 'Gastronomia')->get();
         return view('admin.establishments.create', compact('countries', 'brands', 'types'));
     }
@@ -113,9 +113,10 @@ class EstablishmentController extends Controller
      */
     public function edit($id)
     {
+        
         $images         = GalleryEstablishment::orderBy('order', 'ASC')->get();
         $countries      = Country::all();
-        $brands         = Brand::all();
+        $brands         = Brand::where('status', 1)->get();
         $types          = Type::where('category', 'Gastronomia')->get();
         $establishment  = Establishment::find($id);
         $establishmentForks = EstablishmentForks::getEstablishmentForkOCreateObject($id);
