@@ -6,7 +6,20 @@
 			<input type="text" name="nombre" class="form-control" value="{{ old('nombre') }}" id="nombre" placeholder="">
 		</div>
 	</div>
-	<div class="col-sm-12 col-md-3">
+	<div class="col-sm-12 col-md-6">
+		<div class="form-group">
+			<label for="category_destacada_id">Categoria Destacada <span style="color: red;">*</span></label>
+			<select name="category_destacada_id" class="form-control select2" style="width: 100%;" id="category_destacada_id">
+				<option value="">Seleccione Categoria Destacada ...</option>
+				@foreach($types as $type)
+					@if($type->category == 'categoriadestacadoproducto')
+					<option value="{{ $type->id }}">{{ $type->name }}</option>
+					@endif
+				@endforeach
+			</select>
+		</div>
+	</div>
+	<div class="col-sm-12 col-md-6">
 		<div class="form-group">
 			<label for="tipo_producto_id">Tipo de Producto <span style="color: red;">*</span></label>
 			<select name="tipo_producto_id" class="form-control select2" style="width: 100%;" id="tipo_producto_id" onchange="tipoProducto()">
@@ -19,13 +32,13 @@
 			</select>
 		</div>
 	</div>
-	<div class="col-sm-12 col-md-3">
+	<div class="col-sm-12 col-md-6">
 		<div class="form-group">
 			<label for="category_id">Categoria de Producto <span style="color: red;">*</span></label>
 			<select name="category_id" class="form-control select2" style="width: 100%;" id="category_id">
 				<option value="">Seleccione una Categoria ...</option>
 				@foreach($types as $type)
-					@if($type->category != NULL)
+					@if($type->category != NULL && $type->category != 'categoriadestacadoproducto')
 					<option value="{{ $type->id }}">{{ $type->name }}</option>
 					@endif
 				@endforeach

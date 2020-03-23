@@ -94,6 +94,16 @@
 
 @section('js')
 <script>
-  CKEDITOR.replace('description')
+  CKEDITOR.replace('description');
+
+  $('#category_destacada_id').select2();
+  $('#tipo_producto_id').select2();
+  $('#category_id').select2();
+  $('#coin_afiliado_id').select2();
+  $('#coin_publico_id').select2();
+  $('#establecimiento').select2();
+  $('#condition').select2();
+  $('#tipoInventory').select2();
+  $('#hijo').select2();
 </script>
 @stop
