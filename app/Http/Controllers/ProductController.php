@@ -316,7 +316,21 @@ class ProductController extends Controller
 
   public function getList()
     {
-      return datatables()->eloquent(Product::query())
+      $products = Product::select(
+        'products.id',
+        'products.nombre',
+        't1.name AS category_id',
+        't2.name AS tipo_producto_id',
+        't3.name AS category_destacada_id'
+      )
+      ->leftJoin('types AS t1', 'products.category_id', '=', 't1.id')
+      ->leftJoin('types AS t2', 'products.tipo_producto_id', '=', 't2.id')
+      ->leftJoin('types AS t3', 'products.category_destacada_id', '=', 't3.id')
+      ->orderBy('products.id');
+
+
+
+      return datatables()->eloquent($products)
               ->addColumn('accion', 'admin.products.columnButtonAction')
               ->editColumn('name', function(Product $product) {
                   return '<a href="/admin/productos/'. $product->id.'">'. $product->nombre . '</a>';

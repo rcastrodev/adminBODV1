@@ -35,7 +35,13 @@
 	   			@foreach($productoestablishment as $productoe)
 	   			<tr id="establecimiento_{{ $productoe->establishment_id }}">
 	   				<td>{{ $productoe->establishment_id }}<input type="hidden" name="establecimiento[]" value="{{ $productoe->establishment_id }}"></td>
-	   				<td>{{ $productoe->name }}</td>
+	   				<td>
+	   					@foreach($establishments as $e)
+	   					@if($productoe->establishment_id == $e->id)
+	   					{{ $e->name }}
+	   					@endif
+	   					@endforeach
+	   				</td>
 	   				<td>
 	   					<button type="button" class="btn btn-sm btn-danger delete" onclick="eliminarEstablecimiento({{ $productoe->establishment_id }})">
 	   						<i class="far fa-trash-alt"></i>
