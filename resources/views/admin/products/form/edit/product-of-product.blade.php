@@ -8,7 +8,7 @@
 					<select id="hijo" class="form-control select2" style="width: 100%;">
 						<option value="">Seleccione un producto ...</option>
 						@foreach($products as $product)
-						@if($product->producto_padre == Null)
+						@if($product->producto_padre == Null && $product->id != $producto->id)
 						<option value="{{ $product->id }}">{{ $product->nombre }}</option>
 						@endif
 						@endforeach
