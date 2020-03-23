@@ -15,7 +15,7 @@
     <!-- Custom Tabs -->
     <div class="card">
       <div class="card-header d-flex p-0">
-        <h3 class="card-title p-3">Crear producto</h3>
+        <h3 class="card-title p-3">Editar producto</h3>
         <ul class="nav nav-pills ml-auto p-2">
           <li class="nav-item" id="linkTab_1">
           	<a class="nav-link active" href="#tab_1" data-toggle="tab">Detalles</a>
@@ -94,6 +94,16 @@
 
 @section('js')
 <script>
-  CKEDITOR.replace('description')
+  CKEDITOR.replace('description');
+
+  $('#category_destacada_id').select2();
+  $('#tipo_producto_id').select2();
+  $('#category_id').select2();
+  $('#coin_afiliado_id').select2();
+  $('#coin_publico_id').select2();
+  $('#establecimiento').select2();
+  $('#condition').select2();
+  $('#tipoInventory').select2();
+  $('#hijo').select2();
 </script>
 @stop

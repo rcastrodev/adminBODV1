@@ -33,6 +33,7 @@
 				   	<th>Nombre</th>
 				   	<th>Categoria</th>
 				   	<th>Tipo</th>
+				   	<th>Destacada</th>
 				   	<th>Acción</th>
 		   		</tr>
 		   	</thead>
@@ -59,6 +60,7 @@
 					{data: 'name'},
 					{data: 'category_id'},
 					{data: 'tipo_producto_id'},
+					{data: 'category_destacada_id'},
 					{ data: 'accion', name: 'accion', orderable: false, searchable: false }
 				],
 				language: {

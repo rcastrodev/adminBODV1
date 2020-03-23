@@ -17,6 +17,7 @@ class CreateProductsTable extends Migration
             $table->bigIncrements('id');
             $table->integer('producto_padre')->nullable();
             $table->integer('tipo_producto_id')->nullable();
+            $table->integer('category_destacada_id')->nullable();
             $table->integer('category_id')->nullable();
             $table->integer('country_id')->nullable();
             $table->integer('region_id')->nullable();

@@ -35,7 +35,13 @@
 	   			@foreach($productocondition as $productoc)
 	   			<tr id="condition_{{ $productoc->condition_id }}">
 	   				<td>{{ $productoc->condition_id }}<input type="hidden" name="conditions[]" value="{{ $productoc->condition_id }}"></td>
-	   				<td>{{ $productoc->key }}</td>
+	   				<td>
+	   				@foreach($conditions as $c)
+	   				@if($productoc->condition_id == $c->id)
+	   				{{ $c->nombre }}
+	   				@endif
+	   				@endforeach
+	   				</td>
 	   				<td>
 	   					<button type="button" class="btn btn-sm btn-danger delete" onclick="eliminarCondition({{ $productoc->condition_id }})">
 	   						<i class="far fa-trash-alt"></i>

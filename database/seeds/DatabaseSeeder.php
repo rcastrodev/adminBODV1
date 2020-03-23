@@ -172,6 +172,22 @@ class DatabaseSeeder extends Seeder
         $type->category  = NULL;
         $type->save();
 
+        // Crear tipos categorias destacadas
+        $type            = new Type();
+        $type->name      = 'Desayuno';
+        $type->category  = 'categoriadestacadoproducto';
+        $type->save();
+        
+        $type            = new Type();
+        $type->name      = 'Almuerzo';
+        $type->category  = 'categoriadestacadoproducto';
+        $type->save();
+
+        $type            = new Type();
+        $type->name      = 'Cena';
+        $type->category  = 'categoriadestacadoproducto';
+        $type->save();
+
 
         // Crear condiciones
 
