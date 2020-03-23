@@ -130,6 +130,72 @@
 			})
 	})
 
+
+	var idcountryactual = $('#country_id').val();
+	$.ajax({
+		method: "GET",
+		url: "{{ route('estados-by-pais') }}",
+		data: { 
+			id: idcountryactual
+		},
+		success: function(result){
+			var select;
+    		result.forEach(function(element){
+    			if (element.id == {{$establishment->region_id}}) {
+    				select = 'selected';
+    			} else {
+    				select = '';
+    			}
+    			$('#region_id').append('<option value="'+element.id+'" '+select+'>'+element.name+'</option>')
+    		});
+
+
+    		var idregionactual = $('#region_id').val();
+			$.ajax({
+				method: "GET",
+				url: "{{ route('ciudades-by-estado') }}",
+				data: { 
+					id: idregionactual
+				},
+				success: function(result){
+					var select2;
+    				result.forEach(function(element){
+    					if (element.id == {{$establishment->city_id}}) {
+    						select2 = 'selected';
+    					} else {
+    						select2 = '';
+    					}
+    					$('#city_id').append('<option value="'+element.id+'" '+select2+'>'+element.name+'</option>')
+    				});
+
+
+					var idcityactual = $('#city_id').val();
+					$.ajax({
+						method: "GET",
+						url: "{{ route('zonas-by-ciudad') }}",
+						data: { 
+							id: idcityactual
+						},
+						success: function(result){
+							var select3;
+		    				result.forEach(function(element){
+		    					if (element.id == {{$establishment->zone_id}}) {
+		    						select3 = 'selected';
+		    					} else {
+		    						select3 = '';
+		    					}
+		    					$('#zone_id').append('<option value="'+element.id+'" '+select3+'>'+element.name+'</option>')
+		    				});
+		  				}
+		  			});
+
+
+
+  				}
+  			});
+  		}
+  	});
+
 	$('.region').select2().on('change', function() {
 		var idcity = this.value;
 		$('.city').select2({
@@ -158,7 +224,10 @@
 					},
 				}
 			})
-	})
+	});
+
+
+	
 
 	$('.city').select2().on('change', function() {
 		var idzone = this.value;
