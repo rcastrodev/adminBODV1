@@ -3,6 +3,7 @@
 namespace App;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Model;
+use App\SeasonalDiscountEstablishment;
 
 class Establishment extends Model
 {
@@ -25,5 +26,10 @@ class Establishment extends Model
             // si no trae el objeto file se queda con su valor 
             return self::find($id)->$campo;
         }
+    }
+
+    public function seasonalDiscountEstablishments()
+    {
+        return $this->hasMany(SeasonalDiscountEstablishment::class);
     }
 }
