@@ -16,6 +16,7 @@
         </p>
     </div>
 </form>
+<input id="pac-input" class="controls" type="text" placeholder="Buscar Dirección">
 <div id="map"></div>
 
 
