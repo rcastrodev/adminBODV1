@@ -338,5 +338,5 @@
 	CKEDITOR.replace('address')
 </script>
 <script src='{{ asset('js/establishments/maps.js') }}'></script>
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBKsAmAjoMG5d0WTuFUM7oMNpaLPuDa4CQ&callback=initMap&libraries=places"></script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCzMDCfcjxmZhdg2aBmnlspfyQjT2JyrH8&callback=initMap&libraries=places"></script>
 @stop
